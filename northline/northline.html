@@ -665,17 +665,6 @@
 </head>
 
 <body>
-    <script>
-        (function (n, u) {
-            window.CXoneDfo = n,
-                window[n] = window[n] || function () { (window[n].q = window[n].q || []).push(arguments) }, window[n].u = u,
-                e = document.createElement("script"), e.type = "module", e.src = u + "?" + Math.round(Date.now() / 1e3 / 3600),
-                document.head.appendChild(e)
-        })('cxone', 'https://web-modules-de-na1.niceincontact.com/loader/1/loader.js');
-
-        cxone('init', '1092');
-        cxone('chat', 'init', 1092, 'chat_2074d4e2-bb31-4015-86eb-00b5677c1443');
-    </script>
     <!-- ── HEADER ── -->
     <header class="site-header">
         <div class="header-top">
@@ -994,7 +983,17 @@
             </div>
         </div>
     </footer>
+    <script>
+        (function (n, u) {
+            window.CXoneDfo = n,
+                window[n] = window[n] || function () { (window[n].q = window[n].q || []).push(arguments) }, window[n].u = u,
+                e = document.createElement("script"), e.type = "module", e.src = u + "?" + Math.round(Date.now() / 1e3 / 3600),
+                document.head.appendChild(e)
+        })('cxone', 'https://web-modules-de-na1.niceincontact.com/loader/1/loader.js');
 
+        cxone('init', '1092');
+        cxone('chat', 'init', 1092, 'chat_2074d4e2-bb31-4015-86eb-00b5677c1443');
+    </script>
 </body>
 
 </html>
