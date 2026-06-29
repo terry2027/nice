@@ -993,6 +993,15 @@
 
         cxone('init', '1092');
         cxone('chat', 'init', 1092, 'chat_2074d4e2-bb31-4015-86eb-00b5677c1443');
+
+        // Suppress "No agent available" / "One of our agents will talk to you shortly" banner
+        cxone('chat', 'setTranslations', {
+            waitingDescription: '',
+            waitingForAgent: '',
+            waiting: '',
+            waitingInQueue: ''
+        });
+        cxone('chat', 'setCustomCss', '[data-selector="ACTIVITY_BAR"] { display: none !important; }');
     </script>
 </body>
 
