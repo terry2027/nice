@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="60" height="60" role="img" aria-label="Open chat">
+  <title>Chat</title>
+  <circle cx="30" cy="30" r="30" fill="#00A9A5"/>
+  <path d="M14 20Q14 17 17 17H43Q46 17 46 20V33Q46 36 43 36H33L27 43V36H17Q14 36 14 33Z"
+        fill="white"/>
+</svg>
