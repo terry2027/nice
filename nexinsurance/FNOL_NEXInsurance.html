@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NEXInsurance FNOL Claim Intake</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"/>
+
+<script>
+if (typeof SDK === "undefined") {
+  window.SDK = {
+    submit: function(data) {
+      if (window.parent) {
+        window.parent.postMessage({ type: "xApp_submit", data: data }, "*");
+      }
+    }
+  };
+}
+</script>
+
+<script src="/sdk/app-page-sdk.js"></script>
+
+<style>
+body {
+  background: linear-gradient(135deg,#9B0020,#E4002B);
+  font-family: Arial;
+}
+
+.card {
+  background:white;
+  border-radius:16px;
+  padding:20px;
+  margin:20px auto;
+  max-width:580px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.title {
+  text-align:center;
+  font-weight:bold;
+  font-size:22px;
+  color:#C5003E;
+  margin-bottom:6px;
+}
+
+.subtitle {
+  text-align:center;
+  font-size:13px;
+  color:#555;
+  margin-bottom:20px;
+}
+
+.field {
+  margin-bottom:12px;
+}
+
+.field label {
+  font-size:13px;
+  font-weight:bold;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width:100%;
+  padding:10px;
+  border:2px solid #ddd;
+  border-radius:8px;
+}
+
+.section-title {
+  margin-top:18px;
+  margin-bottom:10px;
+  font-weight:bold;
+  font-size:15px;
+  color:#C5003E;
+  border-top:1px solid #e5e5e5;
+  padding-top:14px;
+}
+
+.button {
+  width:100%;
+  padding:14px;
+  border-radius:20px;
+  background:#E4002B;
+  color:white;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+.note {
+  font-size:12px;
+  color:#666;
+  margin-top:12px;
+  line-height:1.4;
+}
+
+.hidden {
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <!-- NEXInsurance Logo -->
+  <div style="text-align:center; margin-bottom:18px; padding-bottom:16px; border-bottom:2px solid #E4002B;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 60" style="width:200px; height:48px; display:inline-block;">
+      <!-- Shield icon -->
+      <path d="M14 8 L28 4 L42 8 L42 30 C42 40 28 48 28 48 C28 48 14 40 14 30 Z" fill="#E4002B"/>
+      <path d="M21 26 L26 31 L35 20" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- NEXInsurance wordmark -->
+      <text x="52" y="28" font-family="Arial" font-weight="900" font-size="22" fill="#C5003E" letter-spacing="-0.5">NEX</text>
+      <text x="52" y="46" font-family="Arial" font-weight="400" font-size="14" fill="#333333" letter-spacing="1.5">INSURANCE</text>
+    </svg>
+  </div>
+
+  <div class="title">FNOL Claim Intake</div>
+  <div class="subtitle">NEXInsurance Secure Claim Form</div>
+
+  <div class="field">
+    <label>Claim Type</label>
+    <select id="claimType">
+      <option value="Travel">Travel Claim</option>
+      <option value="Health">Health Claim</option>
+      <option value="Life">Life Claim</option>
+    </select>
+  </div>
+
+  <div class="section-title">Customer Information</div>
+
+  <div class="field">
+    <label>Policy Number</label>
+    <input id="policyNumber" placeholder="Example: POL1001"/>
+  </div>
+
+  <div class="field">
+    <label>Full Name</label>
+    <input id="customerName" placeholder="Full name"/>
+  </div>
+
+  <div class="field">
+    <label>Preferred Contact Number</label>
+    <input id="contactNumber" placeholder="Mobile number"/>
+  </div>
+
+  <div class="section-title">Incident Details</div>
+
+  <div class="field">
+    <label>Incident Date</label>
+    <input type="date" id="incidentDate"/>
+  </div>
+
+  <div class="field">
+    <label>Incident Location</label>
+    <input id="incidentLocation" placeholder="City, country, hospital, or location"/>
+  </div>
+
+  <div class="field">
+    <label>Brief Description</label>
+    <textarea id="incidentDescription" placeholder="Briefly describe what happened"></textarea>
+  </div>
+
+  <div class="field">
+    <label>Was anyone injured?</label>
+    <select id="injuryReported">
+      <option value="No">No</option>
+      <option value="Yes">Yes</option>
+      <option value="Not Sure">Not Sure</option>
+    </select>
+  </div>
+
+  <div id="travelSection">
+    <div class="section-title">Travel Claim Details</div>
+
+    <div class="field">
+      <label>Travel Issue Type</label>
+      <select id="travelIssueType">
+        <option value="">Select</option>
+        <option>Lost Baggage</option>
+        <option>Delayed Baggage</option>
+        <option>Trip Cancellation</option>
+        <option>Medical Emergency Overseas</option>
+        <option>Travel Delay</option>
+        <option>Passport or Document Loss</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Travel Destination</label>
+      <input id="travelDestination" placeholder="Destination country or city"/>
+    </div>
+  </div>
+
+  <div id="healthSection" class="hidden">
+    <div class="section-title">Health Claim Details</div>
+
+    <div class="field">
+      <label>Medical Provider / Hospital Name</label>
+      <input id="hospitalName" placeholder="Hospital or clinic name"/>
+    </div>
+
+    <div class="field">
+      <label>Treatment Type</label>
+      <select id="treatmentType">
+        <option value="">Select</option>
+        <option>Hospitalisation</option>
+        <option>Emergency Treatment</option>
+        <option>Outpatient Visit</option>
+        <option>Surgery</option>
+        <option>Medication</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Treatment Date</label>
+      <input type="date" id="treatmentDate"/>
+    </div>
+
+    <div class="field">
+      <label>Estimated Bill Amount</label>
+      <input type="number" id="estimatedBillAmount" placeholder="Amount"/>
+    </div>
+  </div>
+
+  <div id="lifeSection" class="hidden">
+    <div class="section-title">Life Claim Details</div>
+
+    <div class="field">
+      <label>Is this related to a death claim?</label>
+      <select id="deathReported">
+        <option value="No">No</option>
+        <option value="Yes">Yes</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Name of Life Insured</label>
+      <input id="lifeInsuredName" placeholder="Full name of insured person"/>
+    </div>
+
+    <div class="field">
+      <label>Relationship to Life Insured</label>
+      <input id="relationshipToInsured" placeholder="Example: Spouse, child, parent"/>
+    </div>
+
+    <div class="field">
+      <label>Date of Death, if applicable</label>
+      <input type="date" id="dateOfDeath"/>
+    </div>
+
+    <div class="field">
+      <label>Place of Death, if applicable</label>
+      <input id="placeOfDeath" placeholder="City, country, or hospital"/>
+    </div>
+  </div>
+
+  <div class="section-title">Supporting Documents</div>
+
+  <div class="field">
+    <label>Upload Supporting Documents</label>
+    <input
+      type="file"
+      id="supportingDocuments"
+      multiple
+      accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+    />
+  </div>
+
+  <div class="note">
+    Examples: Medical reports, hospital invoices, death certificate,
+    baggage reports, travel receipts, police reports, or supporting evidence.
+  </div>
+
+  <div class="field">
+    <label>Do you have additional supporting documents available?</label>
+    <select id="documentsAvailable">
+      <option>No</option>
+      <option>Yes</option>
+      <option>Not Sure</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>Additional Notes</label>
+    <textarea id="additionalNotes" placeholder="Any other details you would like to share"></textarea>
+  </div>
+
+  <div class="note">
+    Please do not enter banking, card, or payment details in this form.
+    A claims specialist may contact you for documents or additional information if required.
+  </div>
+
+  <button class="button" id="submitBtn">Submit Claim Intake</button>
+</div>
+
+<script>
+const fnolContext = {
+  reference: "{{context.fnol.reference}}",
+  policyNumber: "{{context.fnol.policyID}}",
+  policyType: "{{context.fnol.policyType}}",
+  customerName: "{{context.fnol.customerName}}",
+  contactNumber: "{{context.fnol.mobileNumber}}",
+  claimType: "{{context.fnol.claimType}}"
+};
+
+function showRelevantFields() {
+  const claimType = document.getElementById("claimType").value;
+
+  document.getElementById("travelSection").classList.add("hidden");
+  document.getElementById("healthSection").classList.add("hidden");
+  document.getElementById("lifeSection").classList.add("hidden");
+
+  if (claimType === "Travel") {
+    document.getElementById("travelSection").classList.remove("hidden");
+  }
+
+  if (claimType === "Health") {
+    document.getElementById("healthSection").classList.remove("hidden");
+  }
+
+  if (claimType === "Life") {
+    document.getElementById("lifeSection").classList.remove("hidden");
+  }
+}
+
+function getUploadedFiles() {
+  const files = document.getElementById("supportingDocuments").files;
+  let names = [];
+
+  for (let i = 0; i < files.length; i++) {
+    names.push(files[i].name);
+  }
+
+  return names;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+
+  document.getElementById("policyNumber").value = fnolContext.policyNumber || "";
+  document.getElementById("customerName").value = fnolContext.customerName || "";
+  document.getElementById("contactNumber").value = fnolContext.contactNumber || "";
+
+  if (fnolContext.claimType) {
+    const type = fnolContext.claimType.toLowerCase();
+
+    if (type.includes("travel")) {
+      document.getElementById("claimType").value = "Travel";
+    } else if (type.includes("health") || type.includes("medical")) {
+      document.getElementById("claimType").value = "Health";
+    } else if (type.includes("life") || type.includes("death")) {
+      document.getElementById("claimType").value = "Life";
+    }
+  }
+
+  showRelevantFields();
+
+  const today = new Date().toISOString().split("T")[0];
+
+  document.getElementById("incidentDate").setAttribute("max", today);
+  document.getElementById("treatmentDate").setAttribute("max", today);
+  document.getElementById("dateOfDeath").setAttribute("max", today);
+
+  document.getElementById("claimType").addEventListener("change", showRelevantFields);
+
+  document.getElementById("submitBtn").addEventListener("click", function(){
+
+    const data = {
+      action: "submit_fnol",
+      reference: fnolContext.reference || "",
+      policyNumber: document.getElementById("policyNumber").value,
+      policyType: fnolContext.policyType || "",
+      customerName: document.getElementById("customerName").value,
+      contactNumber: document.getElementById("contactNumber").value,
+      claimType: document.getElementById("claimType").value,
+
+      incidentDate: document.getElementById("incidentDate").value,
+      incidentLocation: document.getElementById("incidentLocation").value,
+      incidentDescription: document.getElementById("incidentDescription").value,
+      injuryReported: document.getElementById("injuryReported").value,
+
+      travelIssueType: document.getElementById("travelIssueType").value,
+      travelDestination: document.getElementById("travelDestination").value,
+
+      hospitalName: document.getElementById("hospitalName").value,
+      treatmentType: document.getElementById("treatmentType").value,
+      treatmentDate: document.getElementById("treatmentDate").value,
+      estimatedBillAmount: document.getElementById("estimatedBillAmount").value,
+
+      deathReported: document.getElementById("deathReported").value,
+      lifeInsuredName: document.getElementById("lifeInsuredName").value,
+      relationshipToInsured: document.getElementById("relationshipToInsured").value,
+      dateOfDeath: document.getElementById("dateOfDeath").value,
+      placeOfDeath: document.getElementById("placeOfDeath").value,
+
+      documentsAvailable: document.getElementById("documentsAvailable").value,
+      uploadedDocuments: getUploadedFiles(),
+      additionalNotes: document.getElementById("additionalNotes").value,
+      submittedAt: new Date().toISOString()
+    };
+
+    SDK.submit(data);
+  });
+});
+</script>
+
+</body>
+</html>

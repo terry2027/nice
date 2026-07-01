@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXInsurance – Cover that cares</title>
+  <meta name="description" content="Award-winning health, life, home and car insurance. NEXInsurance – cover that cares for what matters most." />
+
+  <!-- Cognigy Webchat -->
+  <script src="https://github.com/Cognigy/Webchat/releases/latest/download/webchat.js"></script>
+  <script>
+    initWebchat(
+      "https://endpoint-trial.cognigy.ai/942e649180e105e677e1738bab6bafc1370820e974cc37032e10745e6f93e7b7"
+    );
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── TOKENS ─────────────────────────────────────────────────────────── */
+    :root {
+      --red:          #E40046;
+      --red-dark:     #B8003A;
+      --red-tint:     #FDE8EE;
+      --teal:         #00A9A5;
+      --teal-dark:    #008582;
+      --teal-tint:    #E0F6F6;
+      --charcoal:     #1D1D1B;
+      --dark-grey:    #3C3C3B;
+      --mid-grey:     #717171;
+      --border-grey:  #DEDEDE;
+      --off-white:    #F5F5F5;
+      --white:        #FFFFFF;
+
+      --font:         'Inter', Arial, Helvetica, sans-serif;
+      --radius-sm:    6px;
+      --radius-md:    12px;
+      --radius-lg:    20px;
+      --radius-xl:    28px;
+      --radius-pill:  999px;
+
+      --shadow-sm:    0 1px 4px rgba(0,0,0,.08);
+      --shadow-md:    0 4px 16px rgba(0,0,0,.10);
+      --shadow-lg:    0 8px 32px rgba(0,0,0,.12);
+      --trans:        .2s ease;
+    }
+
+    /* ── RESET ──────────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font);
+      color: var(--charcoal);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: var(--red); text-decoration: none; }
+    a:hover { color: var(--red-dark); }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    /* ── LAYOUT ─────────────────────────────────────────────────────────── */
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── NAVIGATION ─────────────────────────────────────────────────────── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border-grey);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px; gap: 32px;
+    }
+
+    /* Logo */
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .logo-icon {
+      width: 42px; height: 42px;
+      background: var(--red);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-wordmark { display: flex; align-items: baseline; gap: 0; }
+    .logo-nex {
+      font-size: 1.45rem; font-weight: 800;
+      color: var(--red); letter-spacing: -0.03em;
+    }
+    .logo-ins {
+      font-size: 1.45rem; font-weight: 400;
+      color: var(--charcoal); letter-spacing: -0.02em;
+    }
+
+    /* Nav links */
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .nav-link {
+      font-size: .875rem; font-weight: 600;
+      color: var(--charcoal); padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      transition: background var(--trans), color var(--trans);
+      white-space: nowrap;
+    }
+    .nav-link:hover, .nav-link.active {
+      background: var(--red-tint); color: var(--red);
+    }
+
+    .nav-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .btn-login {
+      font-size: .875rem; font-weight: 600; color: var(--charcoal);
+      padding: 8px 18px; border-radius: var(--radius-pill);
+      border: 1.5px solid var(--border-grey);
+      background: transparent; cursor: pointer;
+      transition: border-color var(--trans), background var(--trans);
+    }
+    .btn-login:hover { border-color: var(--mid-grey); background: var(--off-white); }
+
+    /* ── BUTTONS ─────────────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 28px;
+      font-family: var(--font); font-size: 1rem; font-weight: 700;
+      border-radius: var(--radius-pill); border: 2px solid transparent;
+      cursor: pointer; text-decoration: none; white-space: nowrap;
+      transition: background var(--trans), border-color var(--trans),
+                  color var(--trans), transform .15s ease, box-shadow var(--trans);
+    }
+    .btn:active { transform: scale(.97); }
+    .btn-primary {
+      background: var(--red); border-color: var(--red); color: var(--white);
+    }
+    .btn-primary:hover {
+      background: var(--red-dark); border-color: var(--red-dark); color: var(--white);
+      box-shadow: 0 4px 12px rgba(228,0,70,.35);
+    }
+    .btn-outline {
+      background: transparent; border-color: var(--white); color: var(--white);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,.15); color: var(--white); }
+    .btn-outline-red {
+      background: transparent; border-color: var(--red); color: var(--red);
+    }
+    .btn-outline-red:hover { background: var(--red-tint); }
+    .btn-sm { padding: 9px 20px; font-size: .875rem; }
+    .btn-lg { padding: 16px 36px; font-size: 1.1rem; }
+
+    /* ── HERO ────────────────────────────────────────────────────────────── */
+    .hero {
+      position: relative; overflow: hidden;
+      background: var(--red);
+      padding: 80px 0 0;
+      min-height: 540px;
+      display: flex; align-items: flex-end;
+    }
+    /* Subtle wave overlay */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(255,255,255,.08) 0%, transparent 60%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 560px;
+      padding-bottom: 64px;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.2); color: var(--white);
+      font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: var(--radius-pill);
+      margin-bottom: 24px;
+    }
+    .hero-badge svg { flex-shrink: 0; }
+    .hero-heading {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 800; line-height: 1.1; letter-spacing: -.03em;
+      color: var(--white); margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-size: 1.1rem; line-height: 1.65; color: rgba(255,255,255,.88);
+      margin-bottom: 36px;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    /* Hero image panel */
+    .hero-image {
+      position: absolute; right: 0; bottom: 0;
+      width: 48%; max-width: 580px;
+      pointer-events: none;
+    }
+    .hero-image img { width: 100%; border-radius: var(--radius-xl) var(--radius-xl) 0 0; }
+
+    /* Quote tabs */
+    .quote-bar {
+      background: var(--white);
+      box-shadow: var(--shadow-lg);
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      overflow: hidden;
+      margin-top: 48px;
+    }
+    .quote-tabs {
+      display: flex; border-bottom: 2px solid var(--border-grey);
+    }
+    .qtab {
+      flex: 1; padding: 16px 12px;
+      font-size: .85rem; font-weight: 700;
+      color: var(--mid-grey); cursor: pointer;
+      border: none; background: none; border-bottom: 3px solid transparent;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      transition: color var(--trans);
+    }
+    .qtab .qtab-icon {
+      width: 36px; height: 36px; border-radius: var(--radius-md);
+      background: var(--off-white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; transition: background var(--trans);
+    }
+    .qtab:hover { color: var(--red); }
+    .qtab:hover .qtab-icon { background: var(--red-tint); }
+    .qtab.active { color: var(--red); border-bottom-color: var(--red); }
+    .qtab.active .qtab-icon { background: var(--red-tint); }
+
+    .quote-form { padding: 24px; }
+    .qform-row { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; }
+    .qform-group { flex: 1; min-width: 140px; }
+    .qform-label { display: block; font-size: .8rem; font-weight: 600; color: var(--dark-grey); margin-bottom: 6px; }
+    .qform-select, .qform-input {
+      width: 100%; padding: 11px 14px;
+      font-family: var(--font); font-size: .9rem; color: var(--charcoal);
+      background: var(--off-white); border: 1.5px solid var(--border-grey);
+      border-radius: var(--radius-md); outline: none; appearance: none; cursor: pointer;
+      transition: border-color var(--trans);
+    }
+    .qform-select:focus, .qform-input:focus { border-color: var(--red); background: var(--white); }
+
+    /* ── SECTION SHARED ──────────────────────────────────────────────────── */
+    .section { padding: 72px 0; }
+    .section-grey { background: var(--off-white); }
+    .section-dark { background: var(--charcoal); }
+    .section-teal { background: var(--teal); }
+
+    .section-label {
+      font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 12px;
+    }
+    .section-heading {
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      font-weight: 800; letter-spacing: -.03em; line-height: 1.15;
+      color: var(--charcoal); margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 1.05rem; color: var(--mid-grey); line-height: 1.65;
+      max-width: 580px; margin-bottom: 48px;
+    }
+    .section-heading.white, .section-sub.white { color: var(--white); }
+    .section-sub.white { color: rgba(255,255,255,.75); }
+
+    /* ── PRODUCT CARDS ───────────────────────────────────────────────────── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 12px;
+    }
+    .prod-card {
+      background: var(--white); border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm); overflow: hidden;
+      border: 1.5px solid var(--border-grey);
+      transition: box-shadow var(--trans), transform var(--trans);
+      display: flex; flex-direction: column;
+    }
+    .prod-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+
+    .prod-card-hero {
+      position: relative; height: 180px; overflow: hidden;
+    }
+    .prod-card-hero-bg {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem;
+    }
+    .prod-card-hero-bg.red  { background: linear-gradient(135deg, #E40046 0%, #FF6B9D 100%); }
+    .prod-card-hero-bg.teal { background: linear-gradient(135deg, #00A9A5 0%, #5DDDD9 100%); }
+    .prod-card-hero-bg.navy { background: linear-gradient(135deg, #1D3557 0%, #457B9D 100%); }
+    .prod-card-hero-bg.gold { background: linear-gradient(135deg, #E07B1F 0%, #F5C842 100%); }
+
+    .prod-card-tag {
+      position: absolute; top: 14px; left: 14px;
+      background: rgba(255,255,255,.95); color: var(--red);
+      font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: var(--radius-pill);
+    }
+
+    .prod-card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .prod-card-title {
+      font-size: 1.2rem; font-weight: 800; letter-spacing: -.02em;
+      color: var(--charcoal); margin-bottom: 8px;
+    }
+    .prod-card-desc {
+      font-size: .9rem; color: var(--mid-grey); line-height: 1.6;
+      flex: 1; margin-bottom: 20px;
+    }
+    .prod-card-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 16px; border-top: 1px solid var(--border-grey);
+    }
+    .prod-card-from { font-size: .8rem; color: var(--mid-grey); }
+    .prod-card-price { font-size: 1.15rem; font-weight: 800; color: var(--charcoal); }
+
+    /* ── WHY US ──────────────────────────────────────────────────────────── */
+    .why-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px; margin-top: 12px;
+    }
+    .why-card {
+      background: var(--white); border-radius: var(--radius-xl);
+      padding: 32px 28px; text-align: center;
+      border: 1.5px solid var(--border-grey);
+      transition: box-shadow var(--trans), border-color var(--trans);
+    }
+    .why-card:hover { box-shadow: var(--shadow-md); border-color: var(--red); }
+    .why-icon {
+      width: 64px; height: 64px; border-radius: var(--radius-lg);
+      background: var(--red-tint); color: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.75rem; margin: 0 auto 20px;
+    }
+    .why-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .why-desc { font-size: .9rem; color: var(--mid-grey); line-height: 1.6; }
+
+    /* ── STATS BAND ──────────────────────────────────────────────────────── */
+    .stats-band {
+      background: var(--red);
+      padding: 48px 0;
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 32px; text-align: center;
+    }
+    .stat-number {
+      font-size: 2.6rem; font-weight: 800; letter-spacing: -.04em;
+      color: var(--white); margin-bottom: 6px; line-height: 1;
+    }
+    .stat-label { font-size: .9rem; color: rgba(255,255,255,.8); font-weight: 500; }
+
+    /* ── TESTIMONIALS ────────────────────────────────────────────────────── */
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px; margin-top: 12px;
+    }
+    .testi-card {
+      background: var(--white); border-radius: var(--radius-xl);
+      padding: 32px; box-shadow: var(--shadow-sm);
+      border: 1.5px solid var(--border-grey);
+    }
+    .testi-stars { color: var(--red); font-size: 1.1rem; margin-bottom: 16px; }
+    .testi-quote {
+      font-size: 1rem; line-height: 1.7; color: var(--dark-grey);
+      margin-bottom: 20px; font-style: italic;
+    }
+    .testi-quote::before { content: '\201C'; }
+    .testi-quote::after  { content: '\201D'; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--red-tint); color: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 700;
+    }
+    .testi-name { font-weight: 700; font-size: .9rem; color: var(--charcoal); }
+    .testi-cover { font-size: .8rem; color: var(--mid-grey); }
+
+    /* ── QUOTE CTA ───────────────────────────────────────────────────────── */
+    .cta-band {
+      background: linear-gradient(135deg, #E40046 0%, #B8003A 100%);
+      padding: 80px 0; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 60%, rgba(255,255,255,.08) 0%, transparent 60%);
+    }
+    .cta-band .container { position: relative; z-index: 1; }
+    .cta-heading {
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: 800; letter-spacing: -.03em; color: var(--white);
+      margin-bottom: 16px;
+    }
+    .cta-sub { font-size: 1.05rem; color: rgba(255,255,255,.82); margin-bottom: 36px; }
+    .cta-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+    /* ── PARTNERS / AWARDS ───────────────────────────────────────────────── */
+    .awards-strip {
+      background: var(--white); padding: 40px 0;
+      border-top: 1px solid var(--border-grey);
+      border-bottom: 1px solid var(--border-grey);
+    }
+    .awards-label {
+      font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--mid-grey); text-align: center; margin-bottom: 28px;
+    }
+    .awards-list {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      align-items: center; gap: 40px;
+    }
+    .award-item {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: .6; transition: opacity var(--trans);
+    }
+    .award-item:hover { opacity: 1; }
+    .award-badge {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--off-white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; border: 2px solid var(--border-grey);
+    }
+    .award-name { font-size: .75rem; font-weight: 700; color: var(--dark-grey); text-align: center; }
+    .award-year { font-size: .7rem; color: var(--mid-grey); }
+
+    /* ── FOOTER ──────────────────────────────────────────────────────────── */
+    .footer { background: var(--charcoal); color: var(--white); padding: 64px 0 32px; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      margin-bottom: 32px;
+    }
+    .footer-brand-name {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 16px;
+    }
+    .footer-logo-icon {
+      width: 36px; height: 36px; background: var(--red);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    }
+    .footer-nex { font-size: 1.2rem; font-weight: 800; color: var(--red); }
+    .footer-ins { font-size: 1.2rem; font-weight: 400; color: var(--white); }
+
+    .footer-tagline {
+      font-size: .9rem; color: rgba(255,255,255,.55); line-height: 1.7;
+      margin-bottom: 24px; max-width: 280px;
+    }
+    .footer-social { display: flex; gap: 10px; }
+    .social-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.7); font-size: .9rem;
+      text-decoration: none; transition: background var(--trans), color var(--trans);
+    }
+    .social-btn:hover { background: var(--red); color: var(--white); }
+
+    .footer-col-title {
+      font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(255,255,255,.4); margin-bottom: 20px;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 12px; }
+    .footer-links a {
+      font-size: .875rem; color: rgba(255,255,255,.7);
+      text-decoration: none; transition: color var(--trans);
+    }
+    .footer-links a:hover { color: var(--white); }
+
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+      font-size: .8rem; color: rgba(255,255,255,.35);
+    }
+    .footer-bottom-links { display: flex; gap: 24px; }
+    .footer-bottom-links a { color: rgba(255,255,255,.35); text-decoration: none; }
+    .footer-bottom-links a:hover { color: rgba(255,255,255,.7); }
+
+    /* ── MOBILE NAV TOGGLE ───────────────────────────────────────────────── */
+    .nav-burger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .nav-burger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--charcoal); border-radius: 2px;
+      transition: transform var(--trans), opacity var(--trans);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .hero-image { width: 44%; }
+    }
+    @media (max-width: 860px) {
+      .nav-links, .btn-login { display: none; }
+      .nav-burger { display: flex; }
+      .hero-image { display: none; }
+      .hero { padding: 60px 0 0; }
+      .hero-content { max-width: 100%; padding-bottom: 48px; }
+    }
+    @media (max-width: 640px) {
+      .section { padding: 52px 0; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .qform-row { flex-direction: column; }
+      .qform-group { min-width: 100%; }
+    }
+
+    /* ── UTILITY ─────────────────────────────────────────────────────────── */
+    .text-center { text-align: center; }
+    .mt-4 { margin-top: 16px; }
+    .mt-8 { margin-top: 32px; }
+
+    /* ── MOBILE MENU DRAWER ──────────────────────────────────────────────── */
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,.5);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu-drawer {
+      position: absolute; top: 0; right: 0; bottom: 0;
+      width: 280px; background: var(--white);
+      padding: 24px; overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .mobile-menu-close {
+      align-self: flex-end; background: none; border: none; cursor: pointer;
+      font-size: 1.4rem; color: var(--mid-grey); margin-bottom: 8px;
+    }
+    .mobile-nav-link {
+      font-size: 1rem; font-weight: 600; color: var(--charcoal);
+      padding: 12px 16px; border-radius: var(--radius-md);
+      display: block; text-decoration: none;
+      transition: background var(--trans), color var(--trans);
+    }
+    .mobile-nav-link:hover { background: var(--red-tint); color: var(--red); }
+    .mobile-menu-cta { margin-top: 12px; }
+
+    /* Tab content visibility */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── NAVIGATION ─────────────────────────────────────────────────────── -->
+  <header class="nav">
+    <div class="container">
+      <div class="nav-inner">
+
+        <!-- Logo -->
+        <a href="#" class="logo" aria-label="NEXInsurance home">
+          <div class="logo-icon">
+            <!-- N icon mark -->
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 21V5L13 17V5" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M13 21V9L21 21V5" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="logo-wordmark">
+            <span class="logo-nex">NEX</span><span class="logo-ins">Insurance</span>
+          </div>
+        </a>
+
+        <!-- Desktop links -->
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#products" class="nav-link active">Insurance</a></li>
+            <li><a href="#why" class="nav-link">Health Support</a></li>
+            <li><a href="#testimonials" class="nav-link">Member Stories</a></li>
+            <li><a href="#cta" class="nav-link">About</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="btn-login" onclick="alert('Login portal coming soon')">Log in</button>
+          <a href="#quote" class="btn btn-primary btn-sm">Get a quote</a>
+          <button class="nav-burger" id="burgerBtn" aria-label="Open menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile drawer -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-drawer">
+      <button class="mobile-menu-close" id="menuClose">&#10005;</button>
+      <a href="#products"     class="mobile-nav-link" onclick="closeMenu()">Insurance</a>
+      <a href="#why"          class="mobile-nav-link" onclick="closeMenu()">Health Support</a>
+      <a href="#testimonials" class="mobile-nav-link" onclick="closeMenu()">Member Stories</a>
+      <a href="#cta"          class="mobile-nav-link" onclick="closeMenu()">About</a>
+      <div class="mobile-menu-cta">
+        <a href="#quote" class="btn btn-primary" style="width:100%;justify-content:center" onclick="closeMenu()">Get a quote</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ── HERO ─────────────────────────────────────────────────────────── -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+
+          <div class="hero-badge">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1l1.5 3.5L12 5l-2.5 2.5.6 3.5L7 9.5 3.9 11l.6-3.5L2 5l3.5-.5L7 1z" fill="white"/></svg>
+            Award-winning cover · 18 years running
+          </div>
+
+          <h1 class="hero-heading">Cover that cares for what matters most</h1>
+          <p class="hero-sub">Join over 2.4 million Australians who trust NEXInsurance for their health, life, and lifestyle cover. Flexible plans. Straightforward claims. Real people when you need them.</p>
+
+          <div class="hero-actions">
+            <a href="#quote" class="btn btn-outline btn-lg">Get a quick quote</a>
+            <a href="#products" class="btn btn-outline btn-lg" style="background:rgba(255,255,255,.1)">Explore cover</a>
+          </div>
+
+        </div>
+
+        <!-- Quote widget -->
+        <div class="quote-bar" id="quote">
+          <div class="quote-tabs" role="tablist">
+            <button class="qtab active" role="tab" data-tab="health" onclick="switchTab('health')">
+              <span class="qtab-icon">🏥</span> Health
+            </button>
+            <button class="qtab" role="tab" data-tab="life" onclick="switchTab('life')">
+              <span class="qtab-icon">💙</span> Life
+            </button>
+            <button class="qtab" role="tab" data-tab="home" onclick="switchTab('home')">
+              <span class="qtab-icon">🏠</span> Home
+            </button>
+            <button class="qtab" role="tab" data-tab="car" onclick="switchTab('car')">
+              <span class="qtab-icon">🚗</span> Car
+            </button>
+          </div>
+
+          <!-- Health tab -->
+          <div class="quote-form tab-content active" id="tab-health">
+            <div class="qform-row">
+              <div class="qform-group">
+                <label class="qform-label">Cover type</label>
+                <select class="qform-select">
+                  <option>Hospital &amp; Extras</option>
+                  <option>Hospital only</option>
+                  <option>Extras only</option>
+                </select>
+              </div>
+              <div class="qform-group">
+                <label class="qform-label">Cover for</label>
+                <select class="qform-select">
+                  <option>Singles</option>
+                  <option>Couples</option>
+                  <option>Family</option>
+                  <option>Single parent</option>
+                </select>
+              </div>
+              <div class="qform-group">
+                <label class="qform-label">State</label>
+                <select class="qform-select">
+                  <option>NSW</option><option>VIC</option><option>QLD</option>
+                  <option>WA</option><option>SA</option><option>TAS</option>
+                  <option>ACT</option><option>NT</option>
+                </select>
+              </div>
+              <div class="qform-group" style="flex:0 0 auto">
+                <label class="qform-label">&nbsp;</label>
+                <button class="btn btn-primary" style="width:100%;padding:11px 28px">Get a quote →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Life tab -->
+          <div class="quote-form tab-content" id="tab-life">
+            <div class="qform-row">
+              <div class="qform-group">
+                <label class="qform-label">Date of birth</label>
+                <input type="date" class="qform-input" />
+              </div>
+              <div class="qform-group">
+                <label class="qform-label">Sum insured</label>
+                <select class="qform-select">
+                  <option>$500,000</option><option>$1,000,000</option><option>$2,000,000</option>
+                </select>
+              </div>
+              <div class="qform-group">
+                <label class="qform-label">Smoker?</label>
+                <select class="qform-select">
+                  <option>Non-smoker</option><option>Smoker</option>
+                </select>
+              </div>
+              <div class="qform-group" style="flex:0 0 auto">
+                <label class="qform-label">&nbsp;</label>
+                <button class="btn btn-primary" style="width:100%;padding:11px 28px">Get a quote →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Home tab -->
+          <div class="quote-form tab-content" id="tab-home">
+            <div class="qform-row">
+              <div class="qform-group" style="flex:2">
+                <label class="qform-label">Your address</label>
+                <input type="text" class="qform-input" placeholder="Start typing your address…" />
+              </div>
+              <div class="qform-group">
+                <label class="qform-label">Cover type</label>
+                <select class="qform-select">
+                  <option>Building &amp; Contents</option>
+                  <option>Building only</option>
+                  <option>Contents only</option>
+                </select>
+              </div>
+              <div class="qform-group" style="flex:0 0 auto">
+                <label class="qform-label">&nbsp;</label>
+                <button class="btn btn-primary" style="width:100%;padding:11px 28px">Get a quote →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Car tab -->
+          <div class="quote-form tab-content" id="tab-car">
+            <div class="qform-row">
+              <div class="qform-group">
+                <label class="qform-label">Make</label>
+                <select class="qform-select">
+                  <option>Toyota</option><option>Ford</option><option>Holden</option>
+                  <option>Honda</option><option>Mazda</option><option>Other</option>
+                </select>
+              </div>
+              <div class="qform-group">
+                <label class="qform-label">Year</label>
+                <input type="number" class="qform-input" placeholder="e.g. 2021" min="1990" max="2026" />
+              </div>
+              <div class="qform-group">
+                <label class="qform-label">Cover type</label>
+                <select class="qform-select">
+                  <option>Comprehensive</option>
+                  <option>Third Party Property</option>
+                  <option>Third Party Fire &amp; Theft</option>
+                </select>
+              </div>
+              <div class="qform-group" style="flex:0 0 auto">
+                <label class="qform-label">&nbsp;</label>
+                <button class="btn btn-primary" style="width:100%;padding:11px 28px">Get a quote →</button>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /quote-bar -->
+      </div>
+    </section>
+
+    <!-- ── AWARDS STRIP ──────────────────────────────────────────────────── -->
+    <div class="awards-strip">
+      <div class="container">
+        <p class="awards-label">Recognised by Australia's leading awards bodies</p>
+        <div class="awards-list">
+          <div class="award-item">
+            <div class="award-badge">🏆</div>
+            <div class="award-name">Canstar</div>
+            <div class="award-year">Outstanding Value 2025</div>
+          </div>
+          <div class="award-item">
+            <div class="award-badge">⭐</div>
+            <div class="award-name">Mozo</div>
+            <div class="award-year">People's Choice 2025</div>
+          </div>
+          <div class="award-item">
+            <div class="award-badge">🥇</div>
+            <div class="award-name">Finder</div>
+            <div class="award-year">Most Loved Insurer</div>
+          </div>
+          <div class="award-item">
+            <div class="award-badge">💎</div>
+            <div class="award-name">Trustpilot</div>
+            <div class="award-year">4.7 / 5 · 12,000+ reviews</div>
+          </div>
+          <div class="award-item">
+            <div class="award-badge">✅</div>
+            <div class="award-name">APRA Regulated</div>
+            <div class="award-year">Australian Prudential</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PRODUCTS ──────────────────────────────────────────────────────── -->
+    <section class="section" id="products">
+      <div class="container">
+        <p class="section-label">Our cover</p>
+        <h2 class="section-heading">Insurance for every stage of life</h2>
+        <p class="section-sub">Whether you're just starting out or planning ahead, we've got flexible cover designed around you — not the other way around.</p>
+
+        <div class="products-grid">
+
+          <!-- Health -->
+          <div class="prod-card">
+            <div class="prod-card-hero">
+              <div class="prod-card-hero-bg red">🏥</div>
+              <span class="prod-card-tag">Most popular</span>
+            </div>
+            <div class="prod-card-body">
+              <h3 class="prod-card-title">Health Insurance</h3>
+              <p class="prod-card-desc">Hospital and extras cover with 100% back on dental check-ups, optical, and 24/7 mental health support included.</p>
+              <div class="prod-card-footer">
+                <div>
+                  <div class="prod-card-from">From</div>
+                  <div class="prod-card-price">$28.40 / week</div>
+                </div>
+                <a href="#quote" class="btn btn-primary btn-sm">Get a quote</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Life -->
+          <div class="prod-card">
+            <div class="prod-card-hero">
+              <div class="prod-card-hero-bg teal">💙</div>
+            </div>
+            <div class="prod-card-body">
+              <h3 class="prod-card-title">Life Insurance</h3>
+              <p class="prod-card-desc">Up to $2.5m cover to protect the people who depend on you. Income protection also available.</p>
+              <div class="prod-card-footer">
+                <div>
+                  <div class="prod-card-from">From</div>
+                  <div class="prod-card-price">$12.60 / month</div>
+                </div>
+                <a href="#quote" class="btn btn-primary btn-sm">Get a quote</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Home -->
+          <div class="prod-card">
+            <div class="prod-card-hero">
+              <div class="prod-card-hero-bg navy">🏠</div>
+            </div>
+            <div class="prod-card-body">
+              <h3 class="prod-card-title">Home &amp; Contents</h3>
+              <p class="prod-card-desc">Comprehensive building and contents cover with new-for-old replacement and accidental damage protection.</p>
+              <div class="prod-card-footer">
+                <div>
+                  <div class="prod-card-from">From</div>
+                  <div class="prod-card-price">$19.80 / month</div>
+                </div>
+                <a href="#quote" class="btn btn-primary btn-sm">Get a quote</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Car -->
+          <div class="prod-card">
+            <div class="prod-card-hero">
+              <div class="prod-card-hero-bg gold">🚗</div>
+            </div>
+            <div class="prod-card-body">
+              <h3 class="prod-card-title">Car Insurance</h3>
+              <p class="prod-card-desc">Comprehensive cover with roadside assistance, hire car after accident, and no excess for not-at-fault claims.</p>
+              <div class="prod-card-footer">
+                <div>
+                  <div class="prod-card-from">From</div>
+                  <div class="prod-card-price">$24.50 / month</div>
+                </div>
+                <a href="#quote" class="btn btn-primary btn-sm">Get a quote</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── STATS BAND ─────────────────────────────────────────────────────── -->
+    <div class="stats-band">
+      <div class="container">
+        <div class="stats-grid">
+          <div>
+            <div class="stat-number">2.4M+</div>
+            <div class="stat-label">Members covered</div>
+          </div>
+          <div>
+            <div class="stat-number">18 yrs</div>
+            <div class="stat-label">Award-winning cover</div>
+          </div>
+          <div>
+            <div class="stat-number">$1.2B</div>
+            <div class="stat-label">Claims paid in 2024</div>
+          </div>
+          <div>
+            <div class="stat-number">24 / 7</div>
+            <div class="stat-label">Support line access</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── WHY NEXINSURANCE ──────────────────────────────────────────────── -->
+    <section class="section section-grey" id="why">
+      <div class="container text-center">
+        <p class="section-label">Why NEXInsurance</p>
+        <h2 class="section-heading" style="margin:0 auto 16px">Built around you, not the fine print</h2>
+        <p class="section-sub" style="margin:0 auto 48px">We believe insurance should feel human. Here's what makes us different.</p>
+
+        <div class="why-grid">
+
+          <div class="why-card">
+            <div class="why-icon">🦷</div>
+            <h3 class="why-title">100% back on dental</h3>
+            <p class="why-desc">Two dental check-ups per year fully covered at any Members' Choice provider on eligible extras.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-icon">🧠</div>
+            <h3 class="why-title">24/7 mental health line</h3>
+            <p class="why-desc">Chat with a qualified mental health professional any time — day or night, at no extra cost.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-icon">⚡</div>
+            <h3 class="why-title">Fast, digital claims</h3>
+            <p class="why-desc">Submit claims instantly in the NEXInsurance app. Most health claims are processed within minutes.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-icon">🔄</div>
+            <h3 class="why-title">Switch in 10 minutes</h3>
+            <p class="why-desc">We handle the paperwork when you switch from another provider, and you won't re-serve waiting periods already served.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-icon">🎯</div>
+            <h3 class="why-title">Accident Cover Boost</h3>
+            <p class="why-desc">If you have an accident, you'll automatically get Gold-level hospital access regardless of your plan.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-icon">👁️</div>
+            <h3 class="why-title">100% back on optical</h3>
+            <p class="why-desc">Prescription glasses and select contact lenses fully covered on eligible extras, up to annual limits.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TESTIMONIALS ───────────────────────────────────────────────────── -->
+    <section class="section" id="testimonials">
+      <div class="container">
+        <p class="section-label">Member stories</p>
+        <h2 class="section-heading">Real people. Real cover.</h2>
+        <p class="section-sub">Hear from Australians who've experienced the NEXInsurance difference.</p>
+
+        <div class="testi-grid">
+
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-quote">Switching was so easy — their team cancelled my old cover, waived my waiting periods and I had digital cover active the same day.</p>
+            <div class="testi-author">
+              <div class="testi-avatar">SL</div>
+              <div>
+                <div class="testi-name">Sarah L.</div>
+                <div class="testi-cover">Hospital &amp; Extras · Sydney</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-quote">I called the mental health line at 2am during a really tough week. The consultant was empathetic, non-judgemental and genuinely helpful.</p>
+            <div class="testi-author">
+              <div class="testi-avatar">MK</div>
+              <div>
+                <div class="testi-name">Marcus K.</div>
+                <div class="testi-cover">Health Gold · Melbourne</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testi-card">
+            <div class="testi-stars">★★★★★</div>
+            <p class="testi-quote">Filed a home claim after a storm damaged our roof. It was assessed within 48 hours and the repair was fully covered — no arguments.</p>
+            <div class="testi-author">
+              <div class="testi-avatar">JP</div>
+              <div>
+                <div class="testi-name">Jenny &amp; Paul T.</div>
+                <div class="testi-cover">Home &amp; Contents · Brisbane</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA BAND ──────────────────────────────────────────────────────── -->
+    <section class="cta-band" id="cta">
+      <div class="container">
+        <h2 class="cta-heading">Ready to get covered?</h2>
+        <p class="cta-sub">Join NEXInsurance today and get up to 6 weeks free on eligible health cover.<br>New members only. Offer ends 31 July 2026.</p>
+        <div class="cta-actions">
+          <a href="#quote" class="btn btn-outline btn-lg">Get a quick quote</a>
+          <a href="tel:1300639463" class="btn btn-outline btn-lg" style="background:rgba(255,255,255,.1)">Call 1300 NEX INS</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ────────────────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div>
+          <div class="footer-brand-name">
+            <div class="footer-logo-icon">
+              <svg width="22" height="22" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 21V5L13 17V5" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M13 21V9L21 21V5" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div><span class="footer-nex">NEX</span><span class="footer-ins">Insurance</span></div>
+          </div>
+          <p class="footer-tagline">Award-winning health, life, home and car insurance for Australians. Real cover. Real people. Real simple.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn" aria-label="Facebook">f</a>
+            <a href="#" class="social-btn" aria-label="Instagram">in</a>
+            <a href="#" class="social-btn" aria-label="Twitter/X">𝕏</a>
+            <a href="#" class="social-btn" aria-label="LinkedIn">li</a>
+            <a href="#" class="social-btn" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Insurance</div>
+          <ul class="footer-links">
+            <li><a href="#">Health insurance</a></li>
+            <li><a href="#">Life insurance</a></li>
+            <li><a href="#">Home &amp; contents</a></li>
+            <li><a href="#">Car insurance</a></li>
+            <li><a href="#">Travel insurance</a></li>
+            <li><a href="#">Pet insurance</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Support</div>
+          <ul class="footer-links">
+            <li><a href="#">Make a claim</a></li>
+            <li><a href="#">Find a provider</a></li>
+            <li><a href="#">Member portal</a></li>
+            <li><a href="#">Using your cover</a></li>
+            <li><a href="#">Help &amp; FAQs</a></li>
+            <li><a href="#">Contact us</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="#">About NEXInsurance</a></li>
+            <li><a href="#">Newsroom</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Sustainability</a></li>
+            <li><a href="#">Investor centre</a></li>
+            <li><a href="#">Partner with us</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 NEXInsurance Pty Ltd ABN 47 080 890 259. All rights reserved.</p>
+        <ul class="footer-bottom-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Accessibility</a></li>
+          <li><a href="#">Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── SCRIPTS ────────────────────────────────────────────────────────────── -->
+  <script>
+    // Tab switcher for quote widget
+    function switchTab(tab) {
+      document.querySelectorAll('.qtab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+      document.getElementById(`tab-${tab}`).classList.add('active');
+    }
+
+    // Mobile menu
+    const burgerBtn   = document.getElementById('burgerBtn');
+    const mobileMenu  = document.getElementById('mobileMenu');
+    const menuClose   = document.getElementById('menuClose');
+
+    burgerBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+    menuClose.addEventListener('click', closeMenu);
+    mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) closeMenu(); });
+
+    function closeMenu() { mobileMenu.classList.remove('open'); }
+
+    // Smooth active nav link on scroll
+    const sections = document.querySelectorAll('section[id], div[id]');
+    const navLinks  = document.querySelectorAll('.nav-link');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { threshold: 0.4 });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>
