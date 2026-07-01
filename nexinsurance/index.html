@@ -6,14 +6,6 @@
   <title>NEXInsurance – Cover that cares</title>
   <meta name="description" content="Award-winning health, life, home and car insurance. NEXInsurance – cover that cares for what matters most." />
 
-  <!-- Cognigy Webchat -->
-  <script src="https://github.com/Cognigy/Webchat/releases/latest/download/webchat.js"></script>
-  <script>
-    initWebchat(
-      "https://endpoint-trial.cognigy.ai/942e649180e105e677e1738bab6bafc1370820e974cc37032e10745e6f93e7b7"
-    );
-  </script>
-
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1123,6 +1115,14 @@
     }, { threshold: 0.4 });
 
     sections.forEach(s => observer.observe(s));
+  </script>
+
+  <!-- Cognigy Webchat -->
+  <script src="https://github.com/Cognigy/Webchat/releases/latest/download/webchat.js"></script>
+  <script>
+    initWebchat(
+      "https://endpoint-trial.cognigy.ai/942e649180e105e677e1738bab6bafc1370820e974cc37032e10745e6f93e7b7"
+    );
   </script>
 
 </body>

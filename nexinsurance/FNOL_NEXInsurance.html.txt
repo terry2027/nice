@@ -107,15 +107,16 @@ body {
 <div class="card">
 
   <!-- NEXInsurance Logo -->
-  <div style="text-align:center; margin-bottom:18px; padding-bottom:16px; border-bottom:2px solid #E4002B;">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 60" style="width:200px; height:48px; display:inline-block;">
-      <!-- Shield icon -->
-      <path d="M14 8 L28 4 L42 8 L42 30 C42 40 28 48 28 48 C28 48 14 40 14 30 Z" fill="#E4002B"/>
-      <path d="M21 26 L26 31 L35 20" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      <!-- NEXInsurance wordmark -->
-      <text x="52" y="28" font-family="Arial" font-weight="900" font-size="22" fill="#C5003E" letter-spacing="-0.5">NEX</text>
-      <text x="52" y="46" font-family="Arial" font-weight="400" font-size="14" fill="#333333" letter-spacing="1.5">INSURANCE</text>
-    </svg>
+  <div style="display:flex; align-items:center; gap:10px; margin-bottom:18px; padding-bottom:16px; border-bottom:2px solid #E4002B; justify-content:center;">
+    <div style="width:42px; height:42px; background:#E4002B; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 21V5L13 17V5" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M13 21V9L21 21V5" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div style="display:flex; align-items:baseline;">
+      <span style="font-size:1.45rem; font-weight:800; color:#E4002B; letter-spacing:-0.03em;">NEX</span><span style="font-size:1.45rem; font-weight:400; color:#333; letter-spacing:-0.02em;">Insurance</span>
+    </div>
   </div>
 
   <div class="title">FNOL Claim Intake</div>
