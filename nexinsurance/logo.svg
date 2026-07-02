@@ -1,17 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 238 50" width="238" height="50" role="img" aria-label="NEXInsurance logo">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 508 132" width="508" height="132" role="img" aria-label="NEXInsurance logo">
   <title>NEXInsurance</title>
 
-  <!-- Red rounded-square icon background -->
-  <rect x="0" y="3" width="44" height="44" rx="10" ry="10" fill="#E40046"/>
+  <!-- White rounded rectangle container (16px padding all sides, rx=16) -->
+  <rect x="0" y="0" width="508" height="132" rx="16" ry="16" fill="white"/>
 
-  <!-- White stylised N — same paths as index.html, scaled from 26×26 to 44×44 -->
-  <g transform="translate(0,3) scale(1.6923)">
+  <!-- Red rounded-square icon — doubled from 44×44 rx=10 → 88×88 rx=20, offset by padding -->
+  <rect x="16" y="22" width="88" height="88" rx="20" ry="20" fill="#E40046"/>
+
+  <!-- White stylised N — original: translate(0,3) scale(1.6923) → doubled + padding: translate(16,22) scale(3.3846) -->
+  <g transform="translate(16,22) scale(3.3846)">
     <path d="M5 21V5L13 17V5"  stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
     <path d="M13 21V9L21 21V5" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   </g>
 
-  <!-- Wordmark: NEX (bold red) + Insurance (regular charcoal) -->
-  <text x="54" y="35" font-family="Inter, Arial, Helvetica, sans-serif" font-size="24" letter-spacing="-0.5">
+  <!-- Wordmark: font-size doubled 24→48, x doubled 54→108 + padding=124, y doubled 35→70 + padding=86 -->
+  <text x="124" y="86" font-family="Inter, Arial, Helvetica, sans-serif" font-size="48" letter-spacing="-1">
     <tspan font-weight="800" fill="#E40046">NEX</tspan><tspan font-weight="400" fill="#1D1D1B">Insurance</tspan>
   </text>
 </svg>
