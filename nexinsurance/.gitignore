@@ -1,6 +1,23 @@
 # Word documents
 Insurance_AI_Agent_Masterclass_Workbook_2026_v2.docx
 NiCE_Healthcare_Knowledge_Base.docx
+Transcript.doc
+FAQ_Reporting_Accident_Filing_Claim.md
 
 # Agent photo
 agent.png
+World_Cup_Background.png
+Lockscreen.jpg
+
+#Premier Pro files
+*.prproj
+*.prin 
+
+#Video files
+*.mp4
+
+#Powerpoint Files
+*.pptx
+
+#Adobe files
+Adobe*
