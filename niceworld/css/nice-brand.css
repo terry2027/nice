@@ -1,0 +1,528 @@
+/* ==========================================================================
+   NiCE Brand CSS — colors & theme
+   Source: NiCE 2025 Brand Guidelines (nice.com)
+   ========================================================================== */
+
+:root {
+  /* ---- Primary palette ---- */
+  --nice-blue: #3694fc;      /* Pantone 285C — dominant brand color: CTAs, buttons, logo */
+  --nice-charcoal: #21212b;  /* Dark backgrounds, text */
+  --nice-warm-white: #f2f0eb;/* Panels, squircles, chat bubbles only — not full backgrounds */
+  --nice-white: #ffffff;
+
+  /* ---- Secondary palette (gradients, icons, infographics) ---- */
+  --nice-electric-blue: #025afb;
+  --nice-electric-blue-tint: #90b6fd;
+  --nice-blue-tint: #a7d0fe;
+  --nice-electric-indigo: #6100ff;
+  --nice-electric-indigo-tint: #b98fff;
+  --nice-teal: #36ead0;
+  --nice-teal-tint: #acf7f3;
+  --nice-emerald: #00e2a0;
+  --nice-emerald-tint: #9ceed2;
+  --nice-coral: #ff5b8a;
+  --nice-coral-tint: #f3b1c4;
+
+  /* ---- Signature gradient (blue-dominant, blue > indigo > teal) ---- */
+  --nice-gradient-brand: linear-gradient(135deg, #3694fc 0%, #025afb 40%, #6100ff 70%, #36ead0 100%);
+
+  /* ---- Typography ---- */
+  --nice-font-brand: 'Be Vietnam Pro', Arial, sans-serif;
+  --nice-font-fallback: Arial, sans-serif;
+
+  --nice-fw-semibold: 600; /* headlines */
+  --nice-fw-medium: 500;   /* labels, chat bubble text */
+  --nice-fw-regular: 400;  /* feature copy */
+  --nice-fw-light: 300;    /* body copy */
+
+  --nice-tracking-tight: -0.02em;  /* up to 60pt */
+  --nice-tracking-tighter: -0.03em;/* above 60pt */
+  --nice-leading-heading: 1.1;     /* 100–110% */
+  --nice-leading-body: 1.25;       /* 120–130% */
+
+  /* Web / digital type scale */
+  --nice-fs-hero: 4.75rem;    /* 76px */
+  --nice-fs-xl: 4rem;         /* 64px */
+  --nice-fs-lg: 3.5rem;       /* 56px */
+  --nice-fs-h2: 3rem;         /* 48px */
+  --nice-fs-h3: 2.5rem;       /* 40px */
+  --nice-fs-h4: 2rem;         /* 32px */
+  --nice-fs-h5: 1.5rem;       /* 24px */
+  --nice-fs-body: 1.25rem;    /* 20px */
+  --nice-fs-body-sm: 1rem;    /* 16px */
+  --nice-fs-caption: 0.875rem;/* 14px */
+  --nice-fs-label: 0.75rem;   /* 12px */
+
+  /* ---- Border radius tokens ---- */
+  --nice-radius-xs: 2px;
+  --nice-radius-sm: 4px;
+  --nice-radius-md: 6px;
+  --nice-radius-lg: 8px;
+  --nice-radius-xl: 12px;
+  --nice-radius-2xl: 16px;
+  --nice-radius-3xl: 24px;
+  --nice-radius-4xl: 32px;  /* cards, internal panels */
+  --nice-radius-5xl: 40px;  /* image panels, case study cards */
+  --nice-radius-6xl: 48px;  /* full-width / canvas panels */
+  --nice-radius-pill: 9999px; /* buttons, single-line chat bubbles */
+}
+
+/* ==========================================================================
+   Base theme
+   ========================================================================== */
+
+body {
+  font-family: var(--nice-font-brand);
+  font-weight: var(--nice-fw-light);
+  color: var(--nice-charcoal);
+  background-color: var(--nice-white);
+  line-height: var(--nice-leading-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--nice-fw-semibold);
+  letter-spacing: var(--nice-tracking-tight);
+  line-height: var(--nice-leading-heading);
+  text-transform: none; /* sentence case always — never uppercase/title case */
+}
+
+h1 { font-size: var(--nice-fs-hero); letter-spacing: var(--nice-tracking-tighter); }
+h2 { font-size: var(--nice-fs-h2); }
+h3 { font-size: var(--nice-fs-h3); }
+h4 { font-size: var(--nice-fs-h4); }
+h5 { font-size: var(--nice-fs-h5); }
+
+p, body, .nice-body {
+  font-size: var(--nice-fs-body-sm);
+  font-weight: var(--nice-fw-light);
+}
+
+/* ==========================================================================
+   Panels & backgrounds
+   ========================================================================== */
+
+.nice-panel-charcoal {
+  background-color: var(--nice-charcoal);
+  color: var(--nice-white);
+  border-radius: var(--nice-radius-4xl);
+}
+
+.nice-panel-warm-white {
+  background-color: var(--nice-warm-white);
+  color: var(--nice-charcoal);
+  border-radius: var(--nice-radius-4xl);
+}
+
+.nice-panel-full {
+  border-radius: var(--nice-radius-6xl); /* full-width / canvas-width panels */
+}
+
+.nice-panel-card {
+  border-radius: var(--nice-radius-4xl); /* cards / internal panels */
+}
+
+.nice-gradient-bg {
+  background: var(--nice-gradient-brand);
+  color: var(--nice-white);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.nice-btn-primary {
+  background: var(--nice-blue);
+  color: var(--nice-white);
+  border: none;
+  border-radius: var(--nice-radius-pill);
+  font-family: var(--nice-font-brand);
+  font-weight: var(--nice-fw-medium);
+  padding: 0.75rem 1.75rem;
+  cursor: pointer;
+}
+
+.nice-btn-primary:hover {
+  background: var(--nice-electric-blue);
+}
+
+.nice-btn-secondary {
+  background: transparent;
+  color: var(--nice-charcoal);
+  border: 1px solid var(--nice-charcoal);
+  border-radius: var(--nice-radius-pill);
+  font-family: var(--nice-font-brand);
+  font-weight: var(--nice-fw-medium);
+  padding: 0.75rem 1.75rem;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Chat bubbles (conversational UI graphic language)
+   ========================================================================== */
+
+.nice-bubble {
+  display: inline-block;
+  font-family: var(--nice-font-brand);
+  font-weight: var(--nice-fw-medium);
+  letter-spacing: var(--nice-tracking-tight);
+  line-height: var(--nice-leading-heading);
+  padding: 0.75em 1.25em;
+  border-radius: var(--nice-radius-pill); /* single line */
+}
+
+.nice-bubble--multiline {
+  border-radius: var(--nice-radius-3xl); /* 24–48px depending on container */
+}
+
+.nice-bubble--blue     { background: var(--nice-blue); color: var(--nice-white); }
+.nice-bubble--charcoal { background: var(--nice-charcoal); color: var(--nice-white); }
+.nice-bubble--white    { background: var(--nice-white); color: var(--nice-charcoal); }
+.nice-bubble--warm-white { background: var(--nice-warm-white); color: var(--nice-charcoal); }
+
+/* ==========================================================================
+   Squircle icon containers
+   ========================================================================== */
+
+.nice-squircle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--nice-radius-3xl);
+  width: 72px;
+  height: 72px;
+}
+
+.nice-squircle--white   { background: var(--nice-white); }
+.nice-squircle--charcoal{ background: var(--nice-charcoal); }
+.nice-squircle svg, .nice-squircle img {
+  width: 50%;  /* icon = 1/2 of squircle's longest edge */
+  height: 50%;
+}
+
+/* ==========================================================================
+   Mobile overrides
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .nice-panel-full { border-radius: var(--nice-radius-3xl); } /* 24px mobile full-width */
+  .nice-panel-card { border-radius: var(--nice-radius-2xl); } /* 16px mobile internal */
+  h1 { font-size: var(--nice-fs-h2); }
+  h2 { font-size: var(--nice-fs-h3); }
+}
+
+/* ==========================================================================
+   Site layout — NiCE World (social enterprise page)
+   ========================================================================== */
+
+* { box-sizing: border-box; }
+
+img { max-width: 100%; display: block; }
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ---- Header / nav ---- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--nice-white);
+  border-bottom: 1px solid rgba(33,33,43,0.08);
+}
+
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+}
+
+.nav-logo img { height: 34px; width: auto; }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-links a {
+  font-weight: var(--nice-fw-medium);
+  font-size: var(--nice-fs-body-sm);
+}
+
+.nav-links a:hover { color: var(--nice-blue); }
+
+.nav-cta { display: flex; gap: 12px; }
+
+/* ---- Hero ---- */
+
+.hero {
+  position: relative;
+  min-height: 640px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: var(--nice-white);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  animation: kenburns 22s ease-in-out infinite alternate;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(33,33,43,0.82) 10%, rgba(54,148,252,0.55) 60%, rgba(97,0,255,0.45) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  padding: 96px 24px;
+}
+
+.hero-content h1 { font-size: 3.25rem; color: var(--nice-white); margin-bottom: 1rem; }
+.hero-content p { font-size: var(--nice-fs-body); font-weight: var(--nice-fw-regular); margin-bottom: 2rem; }
+
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+@keyframes kenburns {
+  0%   { transform: scale(1) translate(0,0); }
+  100% { transform: scale(1.12) translate(-1.5%, -1.5%); }
+}
+
+/* ---- Sections ---- */
+
+.section { padding: 88px 0; }
+.section-tight { padding: 64px 0; }
+.section-warm { background: var(--nice-warm-white); }
+.section-charcoal { background: var(--nice-charcoal); color: var(--nice-white); }
+
+.section-head {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.section-head.align-left { margin: 0 0 3rem; text-align: left; }
+
+.eyebrow {
+  display: inline-block;
+  font-size: var(--nice-fs-label);
+  font-weight: var(--nice-fw-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--nice-electric-blue);
+  background: var(--nice-blue-tint);
+  padding: 6px 16px;
+  border-radius: var(--nice-radius-pill);
+  margin-bottom: 1rem;
+}
+
+.section-charcoal .eyebrow { background: rgba(255,255,255,0.12); color: var(--nice-teal-tint); }
+
+/* ---- About / split layout ---- */
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.split img { border-radius: var(--nice-radius-5xl); width: 100%; height: 420px; object-fit: cover; }
+
+/* ---- Grids ---- */
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* ---- Pillar / service cards ---- */
+
+.pillar-card {
+  background: var(--nice-white);
+  border: 1px solid rgba(33,33,43,0.08);
+  padding: 40px 32px;
+  border-radius: var(--nice-radius-4xl);
+  height: 100%;
+}
+
+.pillar-card .nice-squircle { margin-bottom: 1.5rem; }
+.pillar-card h3 { font-size: var(--nice-fs-h5); margin-bottom: 0.75rem; }
+.pillar-card p { font-size: var(--nice-fs-body-sm); }
+.pillar-card ul { margin: 1rem 0 0; padding-left: 1.1rem; }
+.pillar-card li { margin-bottom: 0.4rem; font-size: var(--nice-fs-body-sm); }
+
+/* ---- Service / photo cards ---- */
+
+.service-card {
+  border-radius: var(--nice-radius-4xl);
+  overflow: hidden;
+  background: var(--nice-white);
+  border: 1px solid rgba(33,33,43,0.08);
+}
+
+.service-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.service-card .service-body { padding: 28px; }
+.service-card h4 { font-size: var(--nice-fs-h5); margin-bottom: 0.5rem; }
+
+/* ---- Stat cards ---- */
+
+.stat-card {
+  text-align: center;
+  padding: 32px 16px;
+}
+
+.stat-number {
+  font-size: var(--nice-fs-h2);
+  font-weight: var(--nice-fw-semibold);
+  color: var(--nice-blue);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.section-charcoal .stat-number { color: var(--nice-teal-tint); }
+
+.stat-label { font-size: var(--nice-fs-body-sm); }
+
+/* ---- Testimonial ---- */
+
+.testimonial {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 40px;
+  align-items: center;
+  background: var(--nice-white);
+  border-radius: var(--nice-radius-5xl);
+  padding: 40px;
+  border: 1px solid rgba(33,33,43,0.08);
+}
+
+.testimonial img { border-radius: var(--nice-radius-4xl); height: 220px; object-fit: cover; }
+.testimonial blockquote { font-size: var(--nice-fs-h5); font-weight: var(--nice-fw-regular); margin: 0 0 1rem; }
+.testimonial cite { font-style: normal; font-weight: var(--nice-fw-medium); color: var(--nice-electric-blue); }
+
+/* ---- CTA banner ---- */
+
+.cta-banner {
+  text-align: center;
+  padding: 72px 24px;
+}
+
+.cta-banner h2 { color: var(--nice-white); margin-bottom: 1rem; }
+.cta-banner p { font-size: var(--nice-fs-body); margin-bottom: 2rem; }
+.cta-banner .hero-actions { justify-content: center; }
+
+.nice-btn-on-gradient {
+  background: var(--nice-white);
+  color: var(--nice-charcoal);
+  border: none;
+  border-radius: var(--nice-radius-pill);
+  font-family: var(--nice-font-brand);
+  font-weight: var(--nice-fw-medium);
+  padding: 0.75rem 1.75rem;
+  cursor: pointer;
+}
+
+.nice-btn-outline-white {
+  background: transparent;
+  color: var(--nice-white);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: var(--nice-radius-pill);
+  font-family: var(--nice-font-brand);
+  font-weight: var(--nice-fw-medium);
+  padding: 0.75rem 1.75rem;
+  cursor: pointer;
+}
+
+/* ---- Partner strip ---- */
+
+.partner-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.partner-chip {
+  background: var(--nice-warm-white);
+  padding: 10px 22px;
+  border-radius: var(--nice-radius-pill);
+  font-weight: var(--nice-fw-medium);
+  font-size: var(--nice-fs-body-sm);
+}
+
+/* ---- Footer ---- */
+
+.site-footer {
+  background: var(--nice-charcoal);
+  color: var(--nice-white);
+  padding: 64px 0 32px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+
+.footer-logo img { height: 30px; margin-bottom: 1rem; }
+.footer-grid h5 { font-size: var(--nice-fs-body-sm); color: var(--nice-white); margin-bottom: 1rem; }
+.footer-grid a, .footer-grid p { font-size: var(--nice-fs-caption); color: rgba(255,255,255,0.72); }
+.footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: var(--nice-fs-caption);
+  color: rgba(255,255,255,0.6);
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 900px) {
+  .split { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .testimonial { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; }
+  .hero-content h1 { font-size: var(--nice-fs-h3); }
+}
