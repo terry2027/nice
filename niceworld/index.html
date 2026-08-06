@@ -305,6 +305,7 @@
 
     cxone('init', '1092');
     cxone('chat', 'init', 1092, 'chat_c1619550-6921-4803-baa1-387b4fb35478');
+    cxone('chat', 'enableCloseIcon', true);
 
 // Suppress "No agent available" / "One of our agents will talk to you shortly" banner
         cxone('chat', 'setTranslations', {
@@ -313,6 +314,21 @@
             waiting: '',
             waitingInQueue: ''
         });
+
+        
+        cxone('chat', 'onPushUpdate', ['CaseStatusChanged'], pushUpdatePayload => { 
+        if (typeof pushUpdatePayload === 'undefined' || typeof pushUpdatePayload.data === 'undefined') { 
+          return; 
+        }  
+        const { status } = pushUpdatePayload.data.case || {};   
+        if (typeof status === 'undefined') { 
+          return; 
+        }   
+        // When a previous case has been closed, this will set the custom fields again. 
+        if (status === 'closed') { 
+          localStorage.removeItem('_BECustomerID') ; 
+        } 
+      }); 
 
 </script>
 
