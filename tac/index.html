@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transport Accident Commission — Demo Site</title>
+<style>
+  :root{
+    --navy:#0B2545;
+    --navy-dark:#081B33;
+    --teal:#128C9B;
+    --teal-light:#E6F4F6;
+    --amber:#F2994A;
+    --amber-dark:#D9782E;
+    --bg:#F7F9FA;
+    --text:#1E2A33;
+    --text-light:#5A6B76;
+    --border:#DCE4E8;
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.55;
+  }
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;}
+  .container{max-width:1180px;margin:0 auto;padding:0 24px;}
+  .skip-link{
+    position:absolute;left:-9999px;top:0;background:var(--navy);color:#fff;padding:10px 16px;z-index:200;
+  }
+  .skip-link:focus{left:8px;top:8px;}
+
+  /* ---------- Utility bar ---------- */
+  .utility-bar{
+    background:var(--navy-dark);
+    color:#cfe0ea;
+    font-size:13px;
+  }
+  .utility-bar .container{
+    display:flex;justify-content:space-between;align-items:center;height:38px;
+  }
+  .utility-bar a{opacity:.9;margin-left:18px;}
+  .utility-bar a:first-child{margin-left:0;}
+  .utility-bar a:hover{opacity:1;text-decoration:underline;}
+  .utility-left{display:flex;gap:18px;}
+  .utility-right{display:flex;gap:18px;align-items:center;}
+
+  /* ---------- Header ---------- */
+  header.site-header{
+    background:var(--white);
+    border-bottom:1px solid var(--border);
+    position:sticky;top:0;z-index:100;
+  }
+  .header-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 0;
+  }
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand-mark{
+    width:44px;height:44px;border-radius:10px;
+    background:linear-gradient(135deg,var(--teal),var(--navy));
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .brand-name{line-height:1.15;}
+  .brand-name .full{display:block;font-weight:700;font-size:15px;color:var(--navy);}
+  .brand-name .sub{display:block;font-size:11.5px;color:var(--text-light);letter-spacing:.04em;}
+
+  nav.main-nav{display:flex;gap:6px;}
+  nav.main-nav a{
+    padding:10px 14px;border-radius:6px;font-size:14.5px;font-weight:600;color:var(--navy);
+  }
+  nav.main-nav a:hover{background:var(--teal-light);color:var(--teal);}
+  .header-actions{display:flex;align-items:center;gap:10px;}
+  .btn{
+    display:inline-block;padding:10px 20px;border-radius:24px;font-weight:700;font-size:14px;
+    border:2px solid transparent;cursor:pointer;
+  }
+  .btn-primary{background:var(--amber);color:#3a1c00;}
+  .btn-primary:hover{background:var(--amber-dark);}
+  .btn-outline{background:transparent;border-color:var(--navy);color:var(--navy);}
+  .btn-outline:hover{background:var(--navy);color:#fff;}
+  .btn-white{background:#fff;color:var(--navy);}
+  .btn-white:hover{background:var(--teal-light);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:linear-gradient(120deg,var(--navy) 0%, var(--navy-dark) 55%, #06243B 100%);
+    color:#fff;
+    padding:64px 0 76px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero:after{
+    content:"";position:absolute;right:-120px;top:-80px;width:420px;height:420px;border-radius:50%;
+    background:radial-gradient(circle, rgba(18,140,155,.35), transparent 70%);
+  }
+  .hero-inner{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;}
+  .hero-eyebrow{
+    display:inline-block;background:rgba(255,255,255,.12);padding:6px 14px;border-radius:20px;
+    font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px;
+  }
+  .hero h1{font-size:40px;line-height:1.15;margin:0 0 18px;}
+  .hero p.lead{font-size:17px;color:#cfe0ea;max-width:520px;margin:0 0 28px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .hero-card{
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:16px;
+    padding:26px;backdrop-filter:blur(2px);
+  }
+  .hero-card h3{margin:0 0 6px;font-size:16px;}
+  .hero-card p{margin:0 0 16px;font-size:13.5px;color:#cfe0ea;}
+  .stat-row{display:flex;gap:22px;margin-top:22px;}
+  .stat{flex:1;}
+  .stat .num{font-size:22px;font-weight:800;color:#fff;}
+  .stat .lbl{font-size:11.5px;color:#a9c2d0;text-transform:uppercase;letter-spacing:.04em;}
+
+  /* ---------- Quick actions ---------- */
+  .quick-actions{padding:56px 0 20px;}
+  .section-title{
+    display:flex;align-items:baseline;justify-content:space-between;margin-bottom:26px;flex-wrap:wrap;gap:10px;
+  }
+  .section-title h2{font-size:26px;margin:0;color:var(--navy);}
+  .section-title .kicker{font-size:12.5px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;display:block;}
+  .cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .action-card{
+    background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .action-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(11,37,69,.08);}
+  .icon-badge{
+    width:46px;height:46px;border-radius:12px;background:var(--teal-light);
+    display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+  }
+  .action-card h3{font-size:16px;margin:0 0 8px;color:var(--navy);}
+  .action-card p{font-size:13.5px;color:var(--text-light);margin:0 0 14px;}
+  .card-link{font-size:13.5px;font-weight:700;color:var(--teal);}
+  .card-link:hover{text-decoration:underline;}
+
+  /* ---------- Road safety band ---------- */
+  .safety-band{background:var(--white);padding:64px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-top:56px;}
+  .safety-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;}
+  .safety-grid p{color:var(--text-light);font-size:15px;}
+  .safety-visual{
+    background:linear-gradient(135deg,var(--teal-light),#fff);
+    border:1px solid var(--border);border-radius:18px;padding:28px;
+  }
+  .safety-visual .stat-block{display:flex;gap:26px;}
+  .safety-visual .stat-block .stat .num{color:var(--navy);}
+  .safety-visual .stat-block .stat .lbl{color:var(--text-light);}
+  .pill-list{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .pill-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text);}
+  .pill-list .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);margin-top:7px;flex-shrink:0;}
+
+  /* ---------- myTAC promo ---------- */
+  .mytac-promo{padding:64px 0;}
+  .mytac-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;
+    background:linear-gradient(135deg,var(--navy),var(--navy-dark));
+    border-radius:24px;color:#fff;padding:52px;
+  }
+  .mytac-grid .kicker{color:#8fd7de;}
+  .mytac-grid h2{color:#fff;font-size:28px;margin:6px 0 14px;}
+  .mytac-grid p{color:#cfe0ea;font-size:15px;}
+  .feature-list{list-style:none;margin:20px 0 26px;padding:0;display:grid;gap:12px;}
+  .feature-list li{display:flex;gap:10px;font-size:14px;color:#e5f0f4;align-items:flex-start;}
+  .check{
+    width:20px;height:20px;border-radius:50%;background:var(--teal);flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;margin-top:1px;
+  }
+  .mytac-mock{
+    background:#fff;border-radius:16px;padding:20px;color:var(--text);
+  }
+  .mytac-mock .mock-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .mytac-mock .mock-header .dotgroup span{width:9px;height:9px;border-radius:50%;background:var(--border);display:inline-block;margin-right:5px;}
+  .mock-row{
+    display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);font-size:13.5px;
+  }
+  .mock-row:last-child{border-bottom:none;}
+  .status-chip{
+    background:var(--teal-light);color:var(--teal);font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:12px;
+  }
+
+  /* ---------- News ---------- */
+  .news{padding:64px 0;}
+  .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .news-card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+  .news-thumb{height:120px;background:linear-gradient(135deg,var(--teal-light),#d7e9ec);}
+  .news-body{padding:20px;}
+  .news-date{font-size:12px;color:var(--text-light);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;display:block;}
+  .news-card h3{font-size:15.5px;margin:0 0 8px;color:var(--navy);}
+  .news-card p{font-size:13.5px;color:var(--text-light);margin:0;}
+
+  /* ---------- Providers ---------- */
+  .providers{background:var(--white);border-top:1px solid var(--border);padding:56px 0;}
+  .providers-inner{
+    display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;
+    background:var(--teal-light);border-radius:18px;padding:34px 40px;
+  }
+  .providers-inner h2{font-size:21px;margin:0 0 8px;color:var(--navy);}
+  .providers-inner p{margin:0;color:var(--text-light);font-size:14px;max-width:520px;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--navy-dark);color:#a9c2d0;padding:56px 0 22px;margin-top:20px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.1);}
+  .footer-grid h4{color:#fff;font-size:14px;margin:0 0 16px;letter-spacing:.03em;}
+  .footer-grid ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .footer-grid a{font-size:13.5px;color:#a9c2d0;}
+  .footer-grid a:hover{color:#fff;text-decoration:underline;}
+  .footer-brand p{font-size:13px;color:#8ea6b3;max-width:320px;}
+  .footer-bottom{
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding-top:20px;font-size:12px;color:#7d95a2;
+  }
+  .demo-flag{
+    background:#3a2200;color:#ffd9a3;border:1px solid #7a4a12;padding:10px 16px;border-radius:10px;
+    font-size:12.5px;text-align:center;
+  }
+
+  @media (max-width:980px){
+    nav.main-nav{display:none;}
+    .hero-inner{grid-template-columns:1fr;}
+    .cards-grid{grid-template-columns:repeat(2,1fr);}
+    .safety-grid,.mytac-grid{grid-template-columns:1fr;}
+    .news-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- Utility bar -->
+<div class="utility-bar">
+  <div class="container">
+    <div class="utility-left">
+      <a href="#">Accessibility</a>
+      <a href="#">Language: English</a>
+    </div>
+    <div class="utility-right">
+      <a href="#">Contact us</a>
+      <a href="#">myTAC login</a>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#" class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2 L21 6.5 V13 C21 18 17 21.5 12 22.5 C7 21.5 3 18 3 13 V6.5 Z" fill="#ffffff" opacity="0.95"/>
+          <path d="M8.5 12.5 L11 15 L16 9.5" stroke="#0B2545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </span>
+      <span class="brand-name">
+        <span class="full">Transport Accident Commission</span>
+        <span class="sub">DEMO SITE · SAFER ROADS, SUPPORTED RECOVERY</span>
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="#">Home</a>
+      <a href="#claims">Claims</a>
+      <a href="#safety">Road Safety</a>
+      <a href="#mytac">myTAC</a>
+      <a href="#providers">Providers</a>
+      <a href="#news">News</a>
+      <a href="#">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#" class="btn btn-outline">myTAC Login</a>
+      <a href="#claims" class="btn btn-primary">Make a Claim</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <span class="hero-eyebrow">Victorian Transport Accident Commission</span>
+        <h1>Supporting recovery. Working towards zero road trauma.</h1>
+        <p class="lead">We help fund the care and support of people injured in transport accidents on Victorian roads, and invest in the road safety programs that aim to prevent them in the first place.</p>
+        <div class="hero-ctas">
+          <a href="#claims" class="btn btn-primary">Start a claim</a>
+          <a href="#mytac" class="btn btn-outline" style="border-color:#fff;color:#fff;">Explore myTAC</a>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><span class="num">24/7</span><span class="lbl">Claims support line</span></div>
+          <div class="stat"><span class="num">190k+</span><span class="lbl">Clients supported to date</span></div>
+          <div class="stat"><span class="num">$0</span><span class="lbl">Upfront cost for eligible treatment</span></div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>Been in an accident recently?</h3>
+        <p>Lodge a claim in minutes and we'll guide you through what happens next — treatment, income support, and getting back on your feet.</p>
+        <a href="#claims" class="btn btn-white">Report an accident</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick actions -->
+  <section class="quick-actions" id="claims">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <span class="kicker">Get started</span>
+          <h2>What can we help you with today?</h2>
+        </div>
+      </div>
+      <div class="cards-grid">
+        <div class="action-card">
+          <div class="icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2 2 7l10 5 10-5-10-5Z" stroke="#128C9B" stroke-width="1.8" stroke-linejoin="round"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#128C9B" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Report an accident</h3>
+          <p>Tell us what happened and we'll open a claim and confirm your reference number straight away.</p>
+          <a href="#" class="card-link">Start now →</a>
+        </div>
+        <div class="action-card">
+          <div class="icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="2" stroke="#128C9B" stroke-width="1.8"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#128C9B" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Track your claim</h3>
+          <p>See where your claim is up to, upload documents, and message your claims manager anytime.</p>
+          <a href="#" class="card-link">View my claim →</a>
+        </div>
+        <div class="action-card">
+          <div class="icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="#128C9B" stroke-width="1.8"/><path d="M5 21c1.2-4 4-6 7-6s5.8 2 7 6" stroke="#128C9B" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Find a provider</h3>
+          <p>Search approved health and treatment providers near you, from physio to specialist care.</p>
+          <a href="#" class="card-link">Search providers →</a>
+        </div>
+        <div class="action-card">
+          <div class="icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21c-4-3.6-8-6.8-8-11a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 4.2-4 7.4-8 11Z" stroke="#128C9B" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Get support</h3>
+          <p>Speak with our team about income support, home and vehicle modifications, or general questions.</p>
+          <a href="#" class="card-link">Contact us →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Road safety -->
+  <section class="safety-band" id="safety">
+    <div class="container safety-grid">
+      <div>
+        <span class="section-title kicker" style="display:inline-block;">Road safety</span>
+        <h2 style="font-size:26px;color:var(--navy);margin:4px 0 14px;">Every road trauma is one too many</h2>
+        <p>Alongside supporting people after an accident, we fund and partner on programs that make Victorian roads safer for everyone — from safer infrastructure to community education and driver behaviour research.</p>
+        <ul class="pill-list">
+          <li><span class="dot"></span>Investing in safer road infrastructure and speed management</li>
+          <li><span class="dot"></span>Funding community road safety education programs</li>
+          <li><span class="dot"></span>Supporting research into vehicle safety and driver behaviour</li>
+        </ul>
+      </div>
+      <div class="safety-visual">
+        <div class="stat-block">
+          <div class="stat"><span class="num">-18%</span><span class="lbl">Serious injury trend, illustrative</span></div>
+          <div class="stat"><span class="num">120+</span><span class="lbl">Community partners</span></div>
+        </div>
+        <p style="margin-top:20px;font-size:13.5px;color:var(--text-light);">Figures shown are illustrative placeholders for this demo build, not published TAC statistics.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- myTAC promo -->
+  <section class="mytac-promo" id="mytac">
+    <div class="container">
+      <div class="mytac-grid">
+        <div>
+          <span class="kicker" style="font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;">Manage your claim online</span>
+          <h2>myTAC puts your claim in your pocket</h2>
+          <p>Register for myTAC to track progress, upload documents, message your claims manager, and manage reimbursements — wherever you are.</p>
+          <ul class="feature-list">
+            <li><span class="check"></span>Real-time claim status and next steps</li>
+            <li><span class="check"></span>Secure document upload and reimbursement requests</li>
+            <li><span class="check"></span>Direct messaging with your claims manager</li>
+          </ul>
+          <a href="#" class="btn btn-white">Register for myTAC</a>
+        </div>
+        <div class="mytac-mock">
+          <div class="mock-header">
+            <strong style="font-size:13.5px;color:var(--navy);">My Claim — TAC-2026-58421</strong>
+            <span class="dotgroup"><span></span><span></span><span></span></span>
+          </div>
+          <div class="mock-row"><span>Claim status</span><span class="status-chip">In progress</span></div>
+          <div class="mock-row"><span>Claims manager</span><span>Assigned</span></div>
+          <div class="mock-row"><span>Next step</span><span>Treatment plan review</span></div>
+          <div class="mock-row"><span>Documents</span><span>2 uploaded</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- News -->
+  <section class="news" id="news">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <span class="kicker">Latest</span>
+          <h2>News &amp; updates</h2>
+        </div>
+        <a href="#" class="card-link">View all news →</a>
+      </div>
+      <div class="news-grid">
+        <div class="news-card">
+          <div class="news-thumb"></div>
+          <div class="news-body">
+            <span class="news-date">Illustrative date</span>
+            <h3>Expanded telehealth options for regional clients</h3>
+            <p>More clients can now access approved allied health services remotely as part of an ongoing digital access initiative.</p>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-thumb"></div>
+          <div class="news-body">
+            <span class="news-date">Illustrative date</span>
+            <h3>Community road safety grants now open</h3>
+            <p>Local councils and community groups can apply for funding to support local road safety initiatives.</p>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-thumb"></div>
+          <div class="news-body">
+            <span class="news-date">Illustrative date</span>
+            <h3>myTAC document upload made simpler</h3>
+            <p>A refreshed upload flow makes it faster for clients to submit supporting documents from any device.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Providers -->
+  <section class="providers" id="providers">
+    <div class="container">
+      <div class="providers-inner">
+        <div>
+          <h2>Are you a health or treatment provider?</h2>
+          <p>Join our network of approved providers to support clients recovering from transport accidents across Victoria.</p>
+        </div>
+        <a href="#" class="btn btn-primary">Register as a provider</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>Transport Accident Commission</h4>
+        <p>Supporting the recovery of people injured in transport accidents and working towards safer roads across Victoria.</p>
+      </div>
+      <div>
+        <h4>Claims</h4>
+        <ul>
+          <li><a href="#">Report an accident</a></li>
+          <li><a href="#">Track my claim</a></li>
+          <li><a href="#">myTAC login</a></li>
+          <li><a href="#">Reimbursements</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="#">Road safety programs</a></li>
+          <li><a href="#">For providers</a></li>
+          <li><a href="#">News &amp; media</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Feedback &amp; complaints</a></li>
+          <li><a href="#">Interpreter services</a></li>
+          <li><a href="#">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Demo build — original layout, colours and wording, not TAC's real website content.</span>
+      <span class="demo-flag">⚠ Demo build for internal NiCE presentation purposes — not affiliated with or endorsed by the Transport Accident Commission.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Cognigy Webchat -->
+<script src="https://github.com/Cognigy/Webchat/releases/latest/download/webchat.js"></script>
+<script>
+	initWebchat(
+		"https://endpoint-trial.cognigy.ai/69e56d3c68bd1c98a78593f3e9b44651551fce1ce83da26a3ad7aae80ab0fbaa"
+	);
+</script>
+
+</body>
+</html>
