@@ -503,6 +503,19 @@
 		"https://endpoint-trial.cognigy.ai/69e56d3c68bd1c98a78593f3e9b44651551fce1ce83da26a3ad7aae80ab0fbaa"
 	);
 </script>
+<script src="https://github.com/Cognigy/WebchatWidget/releases/download/v3.2.0/webchat.js"></script>
+<script>
+initWebchat("https://endpoint-trial.cognigy.ai/YOUR_URL_TOKEN").then((webchat) => {
+  webchat.registerAnalyticsService((event) => {
+    if (event.type === "webchat/incoming-message") {
+      const data = event.payload?.data;
+      if (data?.redirectTo) {
+        window.location.href = data.redirectTo; // e.g. "brand2.html"
+      }
+    }
+  });
+});
+</script>
 
 </body>
 </html>
