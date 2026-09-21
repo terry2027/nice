@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kismet — Disputes Lodged</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --page-bg: #e5e5e5;
+    --panel-bg: #ffffff;
+    --ink: rgba(0,0,0,0.8);
+    --ink-soft: rgba(0,0,0,0.55);
+    --ink-faint: rgba(0,0,0,0.35);
+    --dark: rgba(0,0,0,0.85);
+    --dark-hover: #000000;
+    --border: rgba(0,0,0,0.08);
+    --radius-lg: 28px;
+    --radius-pill: 999px;
+    --ok-bg: #e9f7ee; --ok-ink: #1e7a41;
+    --pending-bg: #fff6e0; --pending-ink: #8a5a00;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--page-bg);
+    color: var(--ink);
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  svg { display: block; }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Header ---------- */
+  header.site { padding: 20px 0; }
+  header.site .wrap { display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+  .logo svg { width: 20px; height: 20px; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border-radius: var(--radius-pill); padding: 11px 22px; font-size: 14px; font-weight: 600;
+    background: var(--dark); color: #fff; border: none; cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .btn:hover { background: var(--dark-hover); }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+  .btn.ghost:hover { background: rgba(0,0,0,0.04); }
+
+  /* ---------- Success banner ---------- */
+  .success-hero { text-align: center; padding: 24px 0 8px; }
+  .success-icon {
+    width: 56px; height: 56px; border-radius: 50%; background: var(--ok-bg); color: var(--ok-ink);
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 18px;
+  }
+  .success-icon svg { width: 28px; height: 28px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+  .success-hero h1 { font-size: 26px; margin: 0 0 8px; letter-spacing: -0.01em; }
+  .success-hero p { margin: 0; color: var(--ink-soft); font-size: 14.5px; max-width: 460px; margin-inline: auto; }
+
+  /* ---------- Dispute cards ---------- */
+  .dispute-list { margin: 32px 0 20px; display: flex; flex-direction: column; gap: 16px; }
+  .dispute-card { background: var(--panel-bg); border-radius: var(--radius-lg); border: 1px solid var(--border); padding: 26px 28px; }
+  .dispute-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .dispute-id-block .dispute-id-label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); margin-bottom: 4px; }
+  .dispute-id-block .dispute-id-value { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
+  .pill { display: inline-block; padding: 5px 14px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 700; white-space: nowrap; }
+  .pill.pending { background: var(--pending-bg); color: var(--pending-ink); }
+
+  .dispute-details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 24px; margin-bottom: 18px; }
+  .detail-item .detail-label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); margin-bottom: 5px; }
+  .detail-item .detail-value { font-size: 14.5px; font-weight: 600; }
+  .detail-item .detail-value.mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+  .dispute-reason { font-size: 13.5px; color: var(--ink-soft); background: #f6f6f6; border-radius: 12px; padding: 12px 14px; line-height: 1.5; }
+  .dispute-reason .reason-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); display: block; margin-bottom: 4px; font-weight: 700; }
+
+  /* ---------- Disclaimer callout ---------- */
+  .disclaimer {
+    background: var(--pending-bg); color: var(--pending-ink);
+    border-radius: 16px; padding: 16px 20px; font-size: 13.5px; line-height: 1.55; margin: 8px 0 32px;
+  }
+  .disclaimer strong { font-weight: 700; }
+
+  .actions { display: flex; gap: 12px; justify-content: center; margin-bottom: 40px; flex-wrap: wrap; }
+
+  footer.site { padding: 0 0 40px; text-align: center; font-size: 12.5px; color: var(--ink-faint); }
+
+  @media (max-width: 600px) {
+    .dispute-details { grid-template-columns: 1fr 1fr; }
+    .dispute-card { padding: 22px 20px; }
+  }
+  @media (max-width: 420px) {
+    .dispute-details { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="site">
+    <div class="wrap">
+      <a class="logo" href="index.html">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.2-4.6-9.7-9C.6 8.6 1.7 5 5 4.1 7.2 3.5 9.4 4.4 11 6.1c.4.4 1 .4 1.4 0C14 4.4 16.2 3.5 18.4 4.1 21.7 5 22.8 8.6 21 12c-2.5 4.4-9.7 9-9.7 9z"/></svg>
+        kismet
+      </a>
+      <a href="provider-account.html" class="btn ghost">Back to my account</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <div class="success-hero">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h1>2 disputes lodged</h1>
+      <p>Both missing payments have been submitted to the payments team for review. You'll be notified once each case has been assessed.</p>
+    </div>
+
+    <div class="dispute-list">
+
+      <!-- Dispute 1 -->
+      <div class="dispute-card">
+        <div class="dispute-card-head">
+          <div class="dispute-id-block">
+            <div class="dispute-id-label">Dispute ID</div>
+            <div class="dispute-id-value" data-field="dispute1Id">DSP-XXXXXX</div>
+          </div>
+          <span class="pill pending" data-field="dispute1Status">Lodged — pending review</span>
+        </div>
+        <div class="dispute-details">
+          <div class="detail-item">
+            <div class="detail-label">Payment ID</div>
+            <div class="detail-value mono" data-field="dispute1PaymentId">PAY-20260828-001</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Service date</div>
+            <div class="detail-value" data-field="dispute1ServiceDate">2026-08-28</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Amount</div>
+            <div class="detail-value" data-field="dispute1Amount">$1,240.50</div>
+          </div>
+        </div>
+        <div class="dispute-reason">
+          <span class="reason-label">Reason given</span>
+          <span data-field="dispute1Reason">Service was delivered on time.</span>
+        </div>
+      </div>
+
+      <!-- Dispute 2 -->
+      <div class="dispute-card">
+        <div class="dispute-card-head">
+          <div class="dispute-id-block">
+            <div class="dispute-id-label">Dispute ID</div>
+            <div class="dispute-id-value" data-field="dispute2Id">DSP-XXXXXX</div>
+          </div>
+          <span class="pill pending" data-field="dispute2Status">Lodged — pending review</span>
+        </div>
+        <div class="dispute-details">
+          <div class="detail-item">
+            <div class="detail-label">Payment ID</div>
+            <div class="detail-value mono" data-field="dispute2PaymentId">PAY-20260902-002</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Service date</div>
+            <div class="detail-value" data-field="dispute2ServiceDate">2026-09-02</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Amount</div>
+            <div class="detail-value" data-field="dispute2Amount">$860.00</div>
+          </div>
+        </div>
+        <div class="dispute-reason">
+          <span class="reason-label">Reason given</span>
+          <span data-field="dispute2Reason">Service was delivered on time.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="disclaimer">
+      <strong>What happens next:</strong> the payments team will review each dispute within 3 business days. This confirmation does not confirm a refund, payment outcome, or payment timing — you'll be contacted separately once a decision has been made.
+    </div>
+
+    <div class="actions">
+      <a href="provider-account.html" class="btn">Back to my account</a>
+      <a href="#" class="btn ghost">Contact support</a>
+    </div>
+
+  </main>
+
+  <footer class="site">
+    <div class="wrap">© 2026 Kismet. Dispute reference numbers above are generated by the payments system when a dispute is lodged.</div>
+  </footer>
+
+  <!--
+    This page shows 2 mocked disputes, matching Kai's seeded missing
+    payments for provider MER48213 (see provider-account.html).
+
+    Fields to populate from the real backend when a dispute is actually
+    lodged (e.g. from the dispute_transaction tool's "dispute_lodged"
+    uiCard payload — disputeId, paymentId, providerId, status, reason):
+
+      data-field="dispute1Id"          -> real Dispute ID (e.g. DSP-297612)
+      data-field="dispute1Status"      -> real status text
+      data-field="dispute1PaymentId"   -> real payment ID (if different)
+      data-field="dispute1ServiceDate" -> real service date
+      data-field="dispute1Amount"      -> real amount
+      data-field="dispute1Reason"      -> real reason text
+      (same pattern for dispute2*)
+
+    Only the two Dispute IDs are expected to be placeholder values
+    ("DSP-XXXXXX") that need replacing — everything else already matches
+    the known mocked payment data. If a real integration ever needs a
+    variable number of disputes rather than exactly 2, this page would
+    need to move from two hardcoded cards to a templated list.
+  -->
+
+</body>
+</html>
