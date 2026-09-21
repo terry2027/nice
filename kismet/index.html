@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kismet — For Providers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --page-bg: #e5e5e5;
+    --panel-bg: #ffffff;
+    --ink: rgba(0,0,0,0.8);
+    --ink-soft: rgba(0,0,0,0.55);
+    --ink-faint: rgba(0,0,0,0.35);
+    --dark: rgba(0,0,0,0.85);
+    --dark-hover: #000000;
+    --border: rgba(0,0,0,0.08);
+    --radius-lg: 28px;
+    --radius-pill: 999px;
+    --accent-grad: linear-gradient(135deg, #7b3fe4 0%, #c23fd0 55%, #ff7bd0 100%);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--page-bg);
+    color: var(--ink);
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img, svg { display: block; }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Header ---------- */
+  header.site {
+    padding: 20px 0;
+  }
+  header.site .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+  .logo svg { width: 20px; height: 20px; }
+  nav.primary { display: flex; align-items: center; gap: 32px; }
+  nav.primary a { font-size: 14px; color: var(--ink-soft); }
+  nav.primary a.active { color: var(--ink); font-weight: 600; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border-radius: var(--radius-pill);
+    padding: 11px 22px;
+    font-size: 14px; font-weight: 600;
+    background: var(--dark); color: #fff;
+    border: none; cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .btn:hover { background: var(--dark-hover); }
+  .btn.ghost {
+    background: transparent; color: var(--ink); border: 1px solid var(--border);
+  }
+  .btn.ghost:hover { background: rgba(0,0,0,0.04); }
+  .btn.block { width: 100%; }
+
+  /* ---------- Hero ---------- */
+  .hero-shell { padding: 8px 0 12px; }
+  .hero {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    min-height: 360px;
+    display: flex; align-items: center;
+    background: radial-gradient(120% 140% at 15% 20%, #1c1c1c 0%, #0c0c0c 55%, #000 100%);
+    padding: 56px 64px;
+  }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: var(--accent-grad);
+    opacity: 0.28;
+    mix-blend-mode: screen;
+    transform: translate(20%, -10%) rotate(8deg) scale(1.4);
+  }
+  .hero::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(60% 90% at 90% 100%, rgba(255,255,255,0.10), transparent 60%);
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 560px; color: #fff; }
+  .hero-eyebrow { font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 10px; font-weight: 600; letter-spacing: 0.02em; }
+  .hero h1 { font-size: 40px; line-height: 1.15; margin: 0 0 26px; font-weight: 700; letter-spacing: -0.01em; }
+  .hero .btn { background: #fff; color: #111; }
+  .hero .btn:hover { background: #f0f0f0; }
+
+  /* ---------- Section shells ---------- */
+  section { padding: 64px 0; }
+  .section-head { max-width: 620px; margin: 0 0 40px; }
+  .section-head .kicker { font-size: 13px; font-weight: 600; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+  .section-head h2 { font-size: 30px; margin: 0; letter-spacing: -0.01em; }
+
+  /* ---------- Features ---------- */
+  .feature-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+  }
+  .feature-card {
+    background: var(--panel-bg); border-radius: 20px; padding: 28px;
+    border: 1px solid var(--border);
+  }
+  .feature-icon {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: #111; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+  }
+  .feature-icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; }
+  .feature-card h3 { font-size: 17px; margin: 0 0 8px; }
+  .feature-card p { font-size: 14px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+
+  /* ---------- Matching process ---------- */
+  .process-panel {
+    background: var(--panel-bg); border-radius: var(--radius-lg); padding: 48px;
+    border: 1px solid var(--border);
+  }
+  .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 32px; }
+  .process-step .step-num {
+    width: 32px; height: 32px; border-radius: 50%; background: #111; color: #fff;
+    display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .process-step h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); margin: 0 0 6px; }
+  .process-step .step-title { font-size: 17px; font-weight: 600; margin: 0 0 10px; }
+  .process-step p.desc { font-size: 14px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+
+  /* ---------- Pricing ---------- */
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  }
+  .price-card {
+    background: var(--panel-bg); border-radius: 20px; padding: 28px 24px;
+    border: 1px solid var(--border);
+    display: flex; flex-direction: column;
+  }
+  .price-card.popular {
+    border: 2px solid #111; position: relative;
+  }
+  .price-card .badge {
+    position: absolute; top: -12px; left: 24px;
+    background: #111; color: #fff; font-size: 11px; font-weight: 700;
+    padding: 4px 10px; border-radius: var(--radius-pill); letter-spacing: 0.03em;
+  }
+  .price-name { font-size: 15px; font-weight: 700; margin: 6px 0 14px; }
+  .price-amount { font-size: 34px; font-weight: 800; letter-spacing: -0.01em; }
+  .price-amount span.period { font-size: 13px; font-weight: 500; color: var(--ink-soft); }
+  .price-list { list-style: none; padding: 0; margin: 20px 0 24px; flex: 1; }
+  .price-list li {
+    font-size: 13.5px; color: var(--ink-soft); padding: 7px 0 7px 22px; position: relative; line-height: 1.4;
+  }
+  .price-list li::before {
+    content: ""; position: absolute; left: 0; top: 11px; width: 10px; height: 10px;
+    border-left: 2px solid #111; border-bottom: 2px solid #111;
+    transform: rotate(-45deg); opacity: 0.85;
+  }
+
+  /* ---------- Callout band ---------- */
+  .callout {
+    background: #111; color: #fff; border-radius: var(--radius-lg);
+    padding: 48px 56px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
+  .callout h3 { font-size: 22px; margin: 0 0 6px; }
+  .callout p { margin: 0; color: rgba(255,255,255,0.65); font-size: 14px; max-width: 440px; }
+  .callout .btn { background: #fff; color: #111; flex-shrink: 0; }
+  .callout .btn:hover { background: #f0f0f0; }
+
+  /* ---------- Footer ---------- */
+  footer.site { padding: 56px 0 40px; border-top: 1px solid var(--border); margin-top: 24px; }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 24px; margin-bottom: 40px; }
+  .footer-col h5 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); margin: 0 0 14px; }
+  .footer-col a, .footer-col p { display: block; font-size: 14px; color: var(--ink-soft); margin-bottom: 10px; }
+  .footer-bottom { font-size: 13px; color: var(--ink-faint); display: flex; justify-content: space-between; }
+
+  @media (max-width: 900px) {
+    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+    .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    .process-steps { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    .callout { flex-direction: column; align-items: flex-start; }
+    nav.primary { display: none; }
+  }
+  @media (max-width: 600px) {
+    .hero { padding: 40px 28px; min-height: 320px; }
+    .hero h1 { font-size: 30px; }
+    .feature-grid, .pricing-grid { grid-template-columns: 1fr; }
+    section { padding: 44px 0; }
+    .callout { padding: 32px; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="site">
+    <div class="wrap">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.2-4.6-9.7-9C.6 8.6 1.7 5 5 4.1 7.2 3.5 9.4 4.4 11 6.1c.4.4 1 .4 1.4 0C14 4.4 16.2 3.5 18.4 4.1 21.7 5 22.8 8.6 21 12c-2.5 4.4-9.7 9-9.7 9z"/></svg>
+        kismet
+      </div>
+      <nav class="primary">
+        <a href="#features">For providers</a>
+        <a href="#pricing">Pricing</a>
+      </nav>
+      <a href="#" class="btn ghost">Sign in</a>
+    </div>
+  </header>
+
+  <div class="hero-shell wrap">
+    <div class="hero">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Supporting growth.</div>
+        <h1>Grow your business with ease on our marketplace.</h1>
+        <a href="#pricing" class="btn">Claim your listing</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="features" class="wrap">
+    <div class="section-head">
+      <div class="kicker">Features</div>
+      <h2>Everything you need to grow, from one place.</h2>
+    </div>
+    <div class="feature-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <h3>Discover more clients</h3>
+        <p>Expand your reach and attract a diverse range of clients by listing your services on our platform. With exposure to multiple channels, you'll connect with high-value clients you might have missed in the past.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>Get paid faster</h3>
+        <p>Say goodbye to long waits for payment with our invoice acceleration feature. Track the progress of your invoices and claims in real-time, giving you peace of mind and immediate access to your earnings.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 4v5"/></svg></div>
+        <h3>Reduce your admin</h3>
+        <p>Streamline your administrative tasks with our meticulously designed software, crafted by product specialists and users, so you can save time and focus on what matters most — providing excellent care.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></div>
+        <h3>Stay on top of client progress</h3>
+        <p>Gain unparalleled insight into your clients' health journeys. Communicate seamlessly and monitor progress in real-time, ensuring you stay informed and connected every step of the way.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+        <h3>Manage multiple businesses</h3>
+        <p>Built to accommodate businesses of all sizes. Whether you run a franchise or manage multiple locations, handle bookings and profiles from one centralised place.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-7-7 18-3-8-8-3z"/></svg></div>
+        <h3>Promote your business</h3>
+        <p>Enhance your online presence and boost your SEO by engaging on our platform. Choose from various plans to customise your advertising efforts and uncover new opportunities for growth.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head">
+      <div class="kicker">Our matching process</div>
+      <h2>Streamlined and effective matches.</h2>
+    </div>
+    <div class="process-panel">
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-num">1</div>
+          <h4>Enquiry received</h4>
+          <div class="step-title">Immediate action</div>
+          <p class="desc">Our professional staff act immediately when an enquiry is submitted, ensuring the submitter has supplied enough detail to begin the matching process with you.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">2</div>
+          <h4>Staff outreach</h4>
+          <div class="step-title">Quality ensured</div>
+          <p class="desc">Our experienced and friendly staff assist both the participant and providers to ensure each party has what they need to decide whether there's a good match.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">3</div>
+          <h4>Continued support</h4>
+          <div class="step-title">A personal touch</div>
+          <p class="desc">We support our providers with continued communication, so that bookings aren't lost for either party.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="wrap">
+    <div class="section-head">
+      <div class="kicker">Empower your business</div>
+      <h2>Discover unparalleled growth as a registered provider.</h2>
+    </div>
+    <div class="pricing-grid">
+
+      <div class="price-card">
+        <div class="price-name">Free</div>
+        <div class="price-amount">$0</div>
+        <ul class="price-list">
+          <li>Claimed listing</li>
+          <li>Receive enquiries</li>
+          <li>Invoice acceleration</li>
+          <li>Lead alerts (email)</li>
+          <li>Dedicated listing page</li>
+        </ul>
+        <a href="#" class="btn ghost block">Contact sales</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">Access</div>
+        <div class="price-amount">$499<span class="period"> /yearly</span></div>
+        <ul class="price-list">
+          <li>Everything in Free</li>
+          <li>Digital enquiry manager</li>
+          <li>Pre-book 3 events</li>
+          <li>15% discount on events</li>
+          <li>Discounted networking events</li>
+          <li>Sponsorship opportunities</li>
+        </ul>
+        <a href="#" class="btn ghost block">Contact sales</a>
+      </div>
+
+      <div class="price-card popular">
+        <div class="badge">Most popular</div>
+        <div class="price-name">Engage</div>
+        <div class="price-amount">$999<span class="period"> /yearly</span></div>
+        <ul class="price-list">
+          <li>Everything in Access</li>
+          <li>Enhanced matching</li>
+          <li>Multi-location management</li>
+          <li>Easy access to shortlists</li>
+          <li>Pre-book 5 events total</li>
+          <li>20% discount on events</li>
+        </ul>
+        <a href="#" class="btn block">Contact sales</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">Circle</div>
+        <div class="price-amount">$1,499<span class="period"> /yearly</span></div>
+        <ul class="price-list">
+          <li>Everything in Engage</li>
+          <li>Immediate access to shortlist</li>
+          <li>Access to enquiry demand data</li>
+          <li>Dedicated account manager</li>
+          <li>Pre-book 10 events total</li>
+        </ul>
+        <a href="#" class="btn ghost block">Contact sales</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="callout">
+      <div>
+        <h3>Do you need more information about our features?</h3>
+        <p>Our sales team is happy to answer any questions you have.</p>
+      </div>
+      <a href="#" class="btn">Contact sales</a>
+    </div>
+  </section>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="logo" style="margin-bottom: 10px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.2-4.6-9.7-9C.6 8.6 1.7 5 5 4.1 7.2 3.5 9.4 4.4 11 6.1c.4.4 1 .4 1.4 0C14 4.4 16.2 3.5 18.4 4.1 21.7 5 22.8 8.6 21 12c-2.5 4.4-9.7 9-9.7 9z"/></svg>
+            kismet
+          </div>
+          <p style="max-width: 220px;">Helping providers grow their business and participants find the right support, faster.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Product</h5>
+          <a href="#">Discover</a>
+          <a href="#">Marketplace</a>
+          <a href="#">Plan management</a>
+          <a href="#">Concierge AI</a>
+        </div>
+        <div class="footer-col">
+          <h5>Providers</h5>
+          <a href="#">Marketplace</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#">Claim listing</a>
+        </div>
+        <div class="footer-col">
+          <h5>Responsibility</h5>
+          <a href="#">Your rights</a>
+          <a href="#">Privacy policy</a>
+          <a href="#">Terms of use</a>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="#">About us</a>
+          <a href="#">Contact us</a>
+          <a href="#">Blog</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Kismet. All rights reserved.</span>
+        <span>Made for providers, by Kismet.</span>
+      </div>
+    </div>
+  </footer>
+
+  
+<!-- Cognigy Webchat -->
+<script src="https://github.com/Cognigy/Webchat/releases/latest/download/webchat.js"></script>
+<script>
+	initWebchat(
+		"https://endpoint-trial.cognigy.ai/f16a92881c458c869a8c86609d830cbe8de06311779abf443bc3b3b3d4e02166"
+	).then((webchat) => {
+  webchat.registerAnalyticsService((event) => {
+    if (event.type === "webchat/incoming-message") {
+      const data = event.payload?.data;
+      if (data?.redirectTo) {
+        window.location.href = data.redirectTo; // e.g. "brand2.html"
+      }
+    }
+  });
+});
+</script>
+
+</body>
+</html>

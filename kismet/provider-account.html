@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kismet — Provider Account</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --page-bg: #e5e5e5;
+    --panel-bg: #ffffff;
+    --ink: rgba(0,0,0,0.8);
+    --ink-soft: rgba(0,0,0,0.55);
+    --ink-faint: rgba(0,0,0,0.35);
+    --dark: rgba(0,0,0,0.85);
+    --dark-hover: #000000;
+    --border: rgba(0,0,0,0.08);
+    --radius-lg: 28px;
+    --radius-pill: 999px;
+    --accent-grad: linear-gradient(135deg, #7b3fe4 0%, #c23fd0 55%, #ff7bd0 100%);
+    --ok-bg: #e9f7ee; --ok-ink: #1e7a41;
+    --warn-bg: #fdeeea; --warn-ink: #b3401f;
+    --pending-bg: #fff6e0; --pending-ink: #8a5a00;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--page-bg);
+    color: var(--ink);
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  svg { display: block; }
+
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Header ---------- */
+  header.site { padding: 20px 0; }
+  header.site .wrap { display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+  .logo svg { width: 20px; height: 20px; }
+  nav.primary { display: flex; align-items: center; gap: 32px; }
+  nav.primary a { font-size: 14px; color: var(--ink-soft); }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border-radius: var(--radius-pill); padding: 11px 22px; font-size: 14px; font-weight: 600;
+    background: var(--dark); color: #fff; border: none; cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .btn:hover { background: var(--dark-hover); }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+  .btn.ghost:hover { background: rgba(0,0,0,0.04); }
+  .btn.small { padding: 8px 16px; font-size: 13px; }
+
+  /* ---------- Verified banner ---------- */
+  .verified-banner {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--ok-bg); color: var(--ok-ink);
+    border-radius: var(--radius-pill); padding: 8px 16px; font-size: 13px; font-weight: 600;
+    width: fit-content; margin-bottom: 24px;
+  }
+  .verified-banner svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
+  /* ---------- Page head ---------- */
+  .page-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 28px; gap: 16px; flex-wrap: wrap; }
+  .page-head h1 { font-size: 28px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .page-head p { margin: 0; color: var(--ink-soft); font-size: 14px; }
+
+  /* ---------- Panels ---------- */
+  .panel { background: var(--panel-bg); border-radius: var(--radius-lg); border: 1px solid var(--border); padding: 28px 30px; margin-bottom: 20px; }
+  .panel-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 20px; gap: 12px; flex-wrap: wrap; }
+  .panel-head h2 { font-size: 16px; margin: 0; }
+  .panel-head .hint { font-size: 12.5px; color: var(--ink-faint); }
+
+  /* ---------- Provider details grid ---------- */
+  .details-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px 28px; }
+  .detail-item .detail-label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); margin-bottom: 6px; }
+  .detail-item .detail-value { font-size: 15px; font-weight: 600; }
+  .detail-item .detail-value.mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 14px; }
+
+  /* ---------- Stat cards ---------- */
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+  .stat-card { background: var(--panel-bg); border-radius: 20px; border: 1px solid var(--border); padding: 20px 22px; }
+  .stat-card .stat-label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-faint); margin-bottom: 8px; }
+  .stat-card .stat-value { font-size: 26px; font-weight: 800; letter-spacing: -0.01em; }
+  .stat-card .stat-sub { font-size: 12.5px; color: var(--ink-faint); margin-top: 4px; }
+
+  /* ---------- Payments table ---------- */
+  table.payments { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  table.payments th {
+    text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--ink-faint); padding: 10px 12px; border-bottom: 1px solid var(--border);
+  }
+  table.payments td { padding: 14px 12px; border-bottom: 1px solid var(--border); }
+  table.payments tr:last-child td { border-bottom: none; }
+  table.payments td.amount { font-weight: 700; }
+
+  .pill { display: inline-block; padding: 4px 12px; border-radius: var(--radius-pill); font-size: 11.5px; font-weight: 700; }
+  .pill.missing { background: var(--warn-bg); color: var(--warn-ink); }
+  .pill.pending { background: var(--pending-bg); color: var(--pending-ink); }
+  .pill.resolved { background: var(--ok-bg); color: var(--ok-ink); }
+
+  /* ---------- Disputes ---------- */
+  .dispute-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
+  .dispute-row:last-child { border-bottom: none; }
+  .dispute-row .dispute-id { font-weight: 700; font-size: 14px; }
+  .dispute-row .dispute-meta { font-size: 12.5px; color: var(--ink-soft); margin-top: 2px; }
+  .empty-state { padding: 28px 0; text-align: center; color: var(--ink-faint); font-size: 13.5px; font-style: italic; }
+
+  footer.site { padding: 40px 0; text-align: center; font-size: 12.5px; color: var(--ink-faint); }
+
+  @media (max-width: 720px) {
+    .details-grid, .stat-row { grid-template-columns: 1fr 1fr; }
+    table.payments { font-size: 12.5px; }
+    table.payments th:nth-child(2), table.payments td:nth-child(2) { display: none; }
+  }
+  @media (max-width: 480px) {
+    .details-grid, .stat-row { grid-template-columns: 1fr; }
+    .panel { padding: 22px 18px; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="site">
+    <div class="wrap">
+      <a class="logo" href="index.html">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.2-4.6-9.7-9C.6 8.6 1.7 5 5 4.1 7.2 3.5 9.4 4.4 11 6.1c.4.4 1 .4 1.4 0C14 4.4 16.2 3.5 18.4 4.1 21.7 5 22.8 8.6 21 12c-2.5 4.4-9.7 9-9.7 9z"/></svg>
+        kismet
+      </a>
+      <nav class="primary">
+        <a href="index.html">For providers</a>
+        <a href="index.html#pricing">Pricing</a>
+      </nav>
+      <a href="#" class="btn ghost">Log out</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <div class="verified-banner">
+      <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+      Identity verified — Provider ID <strong data-field="providerId">MER48213</strong>
+    </div>
+
+    <div class="page-head">
+      <div>
+        <h1 data-field="providerName">Sunrise Support Services</h1>
+        <p>Provider account &amp; payment overview</p>
+      </div>
+      <a href="#" class="btn small">Update profile</a>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Provider details</h2>
+        <span class="hint">From your Kismet provider profile</span>
+      </div>
+      <div class="details-grid">
+        <div class="detail-item">
+          <div class="detail-label">Provider ID</div>
+          <div class="detail-value mono" data-field="providerId">MER48213</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Business name</div>
+          <div class="detail-value" data-field="providerName">Sunrise Support Services</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Primary category</div>
+          <div class="detail-value" data-field="category">Support Work</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Plan</div>
+          <div class="detail-value" data-field="plan">Engage — $999/yr</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Listing status</div>
+          <div class="detail-value" data-field="listingStatus">Claimed &amp; live</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Contact email</div>
+          <div class="detail-value" data-field="contactEmail">accounts@sunrisesupport.example</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-label">Missing payments</div>
+        <div class="stat-value" data-field="missingCount">2</div>
+        <div class="stat-sub">Not yet issued</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Open disputes</div>
+        <div class="stat-value" data-field="disputeCount">0</div>
+        <div class="stat-sub">Pending payments team review</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total outstanding</div>
+        <div class="stat-value" data-field="outstandingTotal">$2,100.50</div>
+        <div class="stat-sub">AUD, across missing payments</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Payment information</h2>
+        <span class="hint">Populated by Kai after identity verification</span>
+      </div>
+      <table class="payments" data-table="payments">
+        <thead>
+          <tr><th>Payment ID</th><th>Service date</th><th>Amount</th><th>Status</th></tr>
+        </thead>
+        <tbody data-field="paymentsBody">
+          <tr>
+            <td>PAY-20260828-001</td>
+            <td>2026-08-28</td>
+            <td class="amount">$1,240.50</td>
+            <td><span class="pill missing">Missing — not yet issued</span></td>
+          </tr>
+          <tr>
+            <td>PAY-20260902-002</td>
+            <td>2026-09-02</td>
+            <td class="amount">$860.00</td>
+            <td><span class="pill missing">Missing — not yet issued</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Disputes</h2>
+        <span class="hint">Lodged via Kai, reviewed within 3 business days</span>
+      </div>
+      <div data-field="disputesList">
+        <div class="empty-state">No disputes lodged yet.</div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site">
+    <div class="wrap">© 2026 Kismet. Provider account overview — data shown here reflects your most recent verified session.</div>
+  </footer>
+
+  <!--
+    Cognigy voice/chat widget script goes here (added manually).
+
+    This page is intended to be shown/linked to AFTER Kai has verified a
+    provider's identity (Provider ID + security answer). The elements below
+    are tagged with data-field / data-table attributes so a small script
+    (added alongside your Cognigy embed) can populate them from the
+    verified session's data, e.g. from the same uiCard payloads
+    ("missing_payments", "dispute_lodged") Kai's tools already emit:
+
+      providerId, providerName, category, plan, listingStatus, contactEmail
+      missingCount, disputeCount, outstandingTotal
+      [data-table="payments"] tbody  -> one <tr> per payment
+      [data-field="disputesList"]    -> one dispute row per lodged dispute,
+                                         replacing the "No disputes" empty state
+
+    Everything currently shown is placeholder/sample data matching Kai's
+    mocked seed provider (MER48213) so the page renders correctly before
+    any live data is wired in.
+  -->
+<!-- Cognigy Webchat -->
+<script src="https://github.com/Cognigy/Webchat/releases/latest/download/webchat.js"></script>
+<script>
+	initWebchat(
+		"https://endpoint-trial.cognigy.ai/f16a92881c458c869a8c86609d830cbe8de06311779abf443bc3b3b3d4e02166"
+	).then((webchat) => {
+  webchat.registerAnalyticsService((event) => {
+    if (event.type === "webchat/incoming-message") {
+      const data = event.payload?.data;
+      if (data?.redirectTo) {
+        window.location.href = data.redirectTo; // e.g. "brand2.html"
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>
