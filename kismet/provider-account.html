@@ -285,7 +285,7 @@
 		"https://endpoint-trial.cognigy.ai/f16a92881c458c869a8c86609d830cbe8de06311779abf443bc3b3b3d4e02166"
 	).then((webchat) => {
   webchat.registerAnalyticsService((event) => {
-    webchat.open();
+    //webchat.open();
     if (event.type === "webchat/incoming-message") {
       const data = event.payload?.data;
       if (data?.redirectTo) {
