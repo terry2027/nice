@@ -425,7 +425,7 @@
     sessionId = "session-" + Date.now() * Math.random();
     localStorage.setItem("SESSIONID", sessionId);
   }
-  
+
 	initWebchat(
 		"https://endpoint-trial.cognigy.ai/f16a92881c458c869a8c86609d830cbe8de06311779abf443bc3b3b3d4e02166"
 	).then((webchat) => {
@@ -436,6 +436,7 @@
         window.location.href = data.redirectTo; // e.g. "brand2.html"
       }
     }
+    webchat.open();
   });
 });
 </script>
