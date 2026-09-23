@@ -9,6 +9,12 @@ PUSHER_CLUSTER = "ap4"
 PUSHER_CHANNEL = "kismet-pusher-channel"
 PUSHER_EVENT = "state-changed"
 
+[previews.vars]
+PUSHER_KEY = "e7d0fc6fa11f13494a25"
+PUSHER_CLUSTER = "ap4"
+PUSHER_CHANNEL = "kismet-pusher-channel"
+PUSHER_EVENT = "state-changed"
+
 # Secrets (PUSHER_APP_ID, PUSHER_SECRET, WEBHOOK_SHARED_SECRET) are NOT set
 # here — never commit them. Set each with:
 #   wrangler secret put PUSHER_APP_ID
