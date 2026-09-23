@@ -1,0 +1,16 @@
+name = "kismet-cf"
+main = "index.js"
+compatibility_date = "2024-01-01"
+
+# Public Pusher config — safe to commit, sent to the browser as-is.
+[vars]
+PUSHER_KEY = "e7d0fc6fa11f13494a25"
+PUSHER_CLUSTER = "ap4"
+PUSHER_CHANNEL = "kismet-pusher-channel"
+PUSHER_EVENT = "state-changed"
+
+# Secrets (PUSHER_APP_ID, PUSHER_SECRET, WEBHOOK_SHARED_SECRET) are NOT set
+# here — never commit them. Set each with:
+#   wrangler secret put PUSHER_APP_ID
+#   wrangler secret put PUSHER_SECRET
+#   wrangler secret put WEBHOOK_SHARED_SECRET
