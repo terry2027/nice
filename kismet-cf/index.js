@@ -243,7 +243,9 @@ export default {
         const body = await request.json();
         // Webhook Secret verification removed for demo simplicity
         const state = body.state;
-        const payload = body.payload || body;
+        const payload = body.payload
+          ? { ...body.payload, ...(body.disputeCount !== undefined ? { disputeCount: body.disputeCount } : {}) }
+          : body;
 
         const eventPayload = JSON.stringify({
           name: env.PUSHER_EVENT,

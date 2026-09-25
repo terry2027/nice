@@ -3,9 +3,30 @@ import StatCard from '../components/StatCard';
 import PaymentsTable from '../components/PaymentsTable';
 import { formatMoney } from '../utils/format';
 
+const parseAmount = (amt) => {
+  if (typeof amt === 'number') return amt;
+  if (typeof amt === 'string') {
+    const cleaned = amt.replace(/[^0-9.-]+/g, '');
+    const parsed = parseFloat(cleaned);
+    return isNaN(parsed) ? 0 : parsed;
+  }
+  return 0;
+};
+
 export default function AccountPage({ account, disputeCount }) {
   const payments = account.payments || [];
-  const outstandingTotal = payments.reduce((sum, p) => sum + (Number(p.amount) || 0), 0);
+
+  // Filter missing/pending payments if statuses are defined
+  const missingPayments = payments.filter((p) => {
+    if (!p.status) return true;
+    const s = String(p.status).toLowerCase();
+    return s === 'missing' || s === 'pending';
+  });
+
+  // Calculate missing count and outstanding total
+  const missingCount = payments.some((p) => p.status) ? missingPayments.length : payments.length;
+  const targetPayments = payments.some((p) => p.status) && missingPayments.length > 0 ? missingPayments : payments;
+  const outstandingTotal = targetPayments.reduce((sum, p) => sum + parseAmount(p.amount), 0);
 
   return (
     <main className="page active">
@@ -42,8 +63,8 @@ export default function AccountPage({ account, disputeCount }) {
         </div>
 
         <div className="stat-row">
-          <StatCard label="Missing payments" value={payments.length} sub="Not yet issued" />
-          <StatCard label="Open disputes" value={disputeCount} sub="Pending review" />
+          <StatCard label="Missing payments" value={missingCount} sub="Not yet issued" />
+          <StatCard label="Open disputes" value={disputeCount ?? 0} sub="Pending review" />
           <StatCard label="Total outstanding" value={formatMoney(outstandingTotal)} sub="AUD" />
         </div>
 

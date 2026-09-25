@@ -11,6 +11,7 @@ export const initialPortalState = {
     payments: [],
   },
   disputes: [],
+  disputeCount: null,
 };
 
 export function portalReducer(state, action) {
@@ -18,6 +19,11 @@ export function portalReducer(state, action) {
 
   const stateName = String(action.state || '').trim().toLowerCase();
   const payload = action.payload || {};
+
+  // Extract disputeCount if sent at root of action/payload
+  const incomingDisputeCount = payload.disputeCount !== undefined
+    ? Number(payload.disputeCount)
+    : (action.disputeCount !== undefined ? Number(action.disputeCount) : null);
 
   switch (stateName) {
     case 'reset':
@@ -30,6 +36,7 @@ export function portalReducer(state, action) {
       return {
         ...state,
         view: 'account',
+        disputeCount: incomingDisputeCount !== null ? incomingDisputeCount : state.disputeCount,
         account: {
           providerId: payload.providerId || state.account.providerId,
           providerName: payload.providerName || state.account.providerName,
@@ -40,10 +47,12 @@ export function portalReducer(state, action) {
 
     case 'dispute_lodged': {
       const disputes = Array.isArray(payload.disputes) ? payload.disputes : [payload.dispute || payload];
+      const newDisputes = [...state.disputes, ...disputes];
       return {
         ...state,
         view: 'disputes',
-        disputes: [...state.disputes, ...disputes],
+        disputes: newDisputes,
+        disputeCount: incomingDisputeCount !== null ? incomingDisputeCount : newDisputes.length,
       };
     }
 
