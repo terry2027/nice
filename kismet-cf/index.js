@@ -222,7 +222,7 @@ export default {
       return new Response(null, { headers: corsHeaders });
     }
 
-    if (request.method === "POST") {
+    if (request.method === "POST" && url.pathname === "/state") {
       const authHeader = request.headers.get("Authorization");
       if (!authHeader || authHeader !== `Bearer ${env.WEBHOOK_SHARED_SECRET}`) {
         return new Response(JSON.stringify({ error: "Unauthorized" }), {
