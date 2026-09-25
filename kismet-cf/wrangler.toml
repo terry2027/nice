@@ -24,3 +24,17 @@ PUSHER_EVENT = "state-changed"
 #   wrangler secret put PUSHER_APP_ID
 #   wrangler secret put PUSHER_SECRET
 #   wrangler secret put WEBHOOK_SHARED_SECRET
+
+# ...
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+persist = true
+
+[observability.traces]
+enabled = false
+head_sampling_rate = 1
+persist = true
+# ...
+
