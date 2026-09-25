@@ -13,7 +13,7 @@ export default function App() {
 
   // Subscribes to the Pusher channel that index.js (the Cloudflare Worker
   // webhook relay) publishes to whenever Kai's Cognigy flow calls
-  // POST /webhook/state. Also wires up window._demoState(...) for local
+  // POST /state. Also wires up window._demoState(...) for local
   // testing without a live Pusher app.
   usePusherState(dispatch);
 

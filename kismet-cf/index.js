@@ -246,8 +246,8 @@ export default {
         const payload = body.payload || body;
 
         const eventPayload = JSON.stringify({
-          name: "state-change",
-          channels: ["kismet-provider-state"],
+          name: env.PUSHER_EVENT,
+          channels: [env.PUSHER_CHANNEL],
           data: JSON.stringify({ state, payload }),
         });
 
