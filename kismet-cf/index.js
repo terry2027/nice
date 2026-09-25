@@ -218,11 +218,19 @@ async function hmacSha256(secret, message) {
 
 export default {
   async fetch(request, env) {
-    const url = new URL(request.url); 
+    const url = new URL(request.url);
     if (request.method === "OPTIONS") {
       return new Response(null, { headers: corsHeaders });
     }
 
+    if (url.pathname === "/config" && request.method === "GET") {
+      return Response.json({
+        key: env.PUSHER_KEY,
+        cluster: env.PUSHER_CLUSTER,
+        channel: env.PUSHER_CHANNEL,
+        event: env.PUSHER_EVENT,
+      });
+    }
     if (request.method === "POST" && url.pathname === "/state") {
       const authHeader = request.headers.get("Authorization");
       if (!authHeader || authHeader !== `Bearer ${env.WEBHOOK_SHARED_SECRET}`) {
