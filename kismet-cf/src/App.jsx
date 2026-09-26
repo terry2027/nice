@@ -24,7 +24,10 @@ export default function App() {
       <Header onReset={handleReset} />
       {state.view === 'landing' && <LandingPage />}
       {state.view === 'account' && (
-        <AccountPage account={state.account} disputeCount={state.disputes.length} />
+        <AccountPage
+          account={state.account}
+          disputeCount={state.account.disputesCount + state.disputes.length}
+        />
       )}
       {state.view === 'disputes' && <DisputesPage disputes={state.disputes} />}
       <footer className="site">
