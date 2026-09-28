@@ -35,7 +35,7 @@ export default function App() {
       </footer>
 
       {/* Demo floating toolbar — comment out line below to hide during live production demos */}
-      <DemoFloatingBar dispatch={dispatch} />
+      {/*<DemoFloatingBar dispatch={dispatch} />*/}
     </>
   );
 }
