@@ -1,227 +1,58 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kismet — Provider Portal</title>
+<!-- Cognigy WebRTC Script -->
+<script src="https://github.com/Cognigy/click-to-call-widget/releases/latest/download/webRTCWidget.js"></script>
 
-    <style>
-      /* --- Kai Agent Card Widget (Bottom-Left) --- */
-      .kai-widget-card {
-        position: fixed;
-        bottom: 24px;
-        left: 24px;
-        width: 360px;
-        background: linear-gradient(
-          145deg,
-          #09203b 0%,
-          rgba(9, 32, 59, 0.895) 30%,
-          rgba(224, 239, 242, 0.74) 75%,
-          #f7f9fa 100%
-        );
-        border-radius: 20px;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
-        overflow: hidden;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        z-index: 9999;
-      }
-
-      .kai-card-top {
-        position: relative;
-        padding: 16px 16px 14px 16px;
-        display: flex;
-        align-items: center;
-        gap: 14px;
-      }
-
-      .kai-avatar-wrapper {
-        position: relative;
-        width: 64px;
-        height: 64px;
-        flex-shrink: 0;
-      }
-
-      .kai-avatar-img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2.5px solid #ffffff;
-      }
-
-      .kai-status-dot {
-        position: absolute;
-        bottom: 0px;
-        right: 0px;
-        width: 16px;
-        height: 16px;
-        background-color: #22c55e;
-        border: 2.5px solid #ffffff;
-        border-radius: 50%;
-      }
-
-      .kai-info {
-        flex: 1;
-        color: #ffffff;
-      }
-
-      .kai-name {
-        margin: 0;
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #ffffff;
-      }
-
-      .kai-role {
-        margin: 2px 0 0 0;
-        font-size: 0.85rem;
-        color: #e0eff2;
-      }
-
-      .kai-badge {
-        display: inline-block;
-        margin-top: 4px;
-        font-size: 0.72rem;
-        font-weight: 800;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        color: #93c5fd;
-      }
-
-      /* Call Action Button */
-      .kai-call-btn {
-        width: 48px;
-        height: 48px;
-        background-color: #000000;
-        border: 1.5px solid rgba(255, 255, 255, 0.2);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
-        transition: transform 0.2s ease, background-color 0.2s ease;
-        flex-shrink: 0;
-      }
-
-      .kai-call-btn:hover {
-        transform: scale(1.08);
-        background-color: #1f2937;
-      }
-
-      .kai-call-btn svg {
-        width: 22px;
-        height: 22px;
-        fill: #ffffff;
-      }
-
-      .kai-card-bottom {
-        padding: 12px 16px 16px 16px;
-        font-size: 0.82rem;
-        color: #09203b;
-        line-height: 1.4;
-      }
-
-      .kai-card-bottom strong {
-        color: #09203b;
-        font-weight: 700;
-        letter-spacing: 0.03em;
-      }
-
-      /* Anchor Cognigy call overlay to bottom left */
-      #cognigy-webrtc-widget,
-      .cognigy-webrtc-widget-container,
-      div[class*="webrtc-widget"] {
-        position: fixed !important;
-        bottom: 24px !important;
-        left: 24px !important;
-        right: auto !important;
-        z-index: 10000 !important;
-      }
-
-      /* Hide the default launcher button before call starts */
-      #cognigy-webrtc-widget > button,
-      .cognigy-webrtc-widget-container > button,
-      div[class*="webrtc-widget"] > button {
-        opacity: 0 !important;
-        pointer-events: none !important;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-
-    <!-- Kai AI Assistant Floating Card -->
-    <div class="kai-widget-card" id="kai-agent-card">
-      <div class="kai-card-top">
-        <div class="kai-avatar-wrapper">
-          <img src="/kai-avatar.png" alt="Kai - AI Assistant" class="kai-avatar-img" />
-          <span class="kai-status-dot"></span>
-        </div>
-        <div class="kai-info">
-          <h3 class="kai-name">Hi, I'm Kai</h3>
-          <p class="kai-role">Digital Assistant</p>
-          <span class="kai-badge">Kismet Support</span>
-        </div>
-        <button class="kai-call-btn" onclick="startWebRTCCall()" title="Call Kai">
-          <svg viewBox="0 0 24 24">
-            <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-.25 1.02l-2.2 2.2z"/>
-          </svg>
-        </button>
-      </div>
-      <div class="kai-card-bottom">
-        <strong>LISTENING READY:</strong> Click the call button to verify invoices, check payment disputes, or manage service claims.
-      </div>
-    </div>
-
-    <!-- Cognigy Webchat (Bottom-Right) -->
-    <script src="https://github.com/Cognigy/Webchat/releases/latest/download/webchat.js"></script>
-    <script>
-      initWebchat(
-        "https://endpoint-trial.cognigy.ai/f16a92881c458c869a8c86609d830cbe8de06311779abf443bc3b3b3d4e02166"
+<script>
+  // 1. Initialize widget on page load so it is ready in the background
+  window.addEventListener("load", () => {
+    if (window.initWebRTCWidget) {
+      window.initWebRTCWidget(
+        "https://endpoint-trial.cognigy.ai/cc80b6b387a2aa47eb25413a1e4ba27650b6c6a865ebe79173142950f334814a"
       );
-    </script>
+    }
+  });
 
-    <!-- Cognigy WebRTC Widget -->
-    <script src="https://github.com/Cognigy/click-to-call-widget/releases/latest/download/webRTCWidget.js"></script>
-    <script>
-      // 1. Initialize the widget on load so it is ready immediately
-      window.addEventListener("load", () => {
-        if (window.initWebRTCWidget) {
-          window.initWebRTCWidget(
-            "https://endpoint-trial.cognigy.ai/cc80b6b387a2aa47eb25413a1e4ba27650b6c6a865ebe79173142950f334814a"
-          );
-        }
-      });
+  // Helper function to find the real clickable button even inside Shadow DOM
+  function findWidgetButton() {
+    // 1. Standard DOM search across all common Cognigy wrapper elements
+    const standardBtn = document.querySelector(
+      '#cognigy-webrtc-widget button, .cognigy-webrtc-widget button, [class*="webrtc"] button'
+    );
+    if (standardBtn) return standardBtn;
 
-      // 2. Trigger the call directly when the custom Kai button is clicked
-      function startWebRTCCall() {
-        // Query the default launcher button inside the widget container
-        const defaultWidgetBtn = document.querySelector(
-          '#cognigy-webrtc-widget button, .cognigy-webrtc-widget-container button, div[class*="webrtc-widget"] button'
-        );
+    // 2. Shadow DOM search
+    const hosts = document.querySelectorAll(
+      '#cognigy-webrtc-widget, [class*="webrtc"], cognigy-webrtc'
+    );
+    for (const host of hosts) {
+      if (host.shadowRoot) {
+        const shadowBtn = host.shadowRoot.querySelector('button, [role="button"]');
+        if (shadowBtn) return shadowBtn;
+      }
+    }
 
-        if (defaultWidgetBtn) {
-          defaultWidgetBtn.click();
-        } else if (window.initWebRTCWidget) {
-          // Fallback if not yet initialized
-          window.initWebRTCWidget(
-            "https://endpoint-trial.cognigy.ai/cc80b6b387a2aa47eb25413a1e4ba27650b6c6a865ebe79173142950f334814a"
-          );
-          setTimeout(() => {
-            const btn = document.querySelector(
-              '#cognigy-webrtc-widget button, .cognigy-webrtc-widget-container button, div[class*="webrtc-widget"] button'
-            );
-            if (btn) btn.click();
-          }, 300);
-        }
+    return null;
+  }
 
-        // Hide the Kai custom card once the call interface starts
+  function startWebRTCCall() {
+    let attempts = 0;
+    const maxAttempts = 20;
+
+    const interval = setInterval(() => {
+      attempts++;
+      const callBtn = findWidgetButton();
+
+      if (callBtn) {
+        clearInterval(interval);
+        // Dispatch synthetic click event
+        callBtn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+
+        // Hide your custom Kai card once call connects
         const card = document.getElementById("kai-agent-card");
         if (card) card.style.display = "none";
+      } else if (attempts >= maxAttempts) {
+        clearInterval(interval);
+        console.warn("Could not find Cognigy WebRTC button to auto-click.");
       }
-    </script>
-  </body>
-</html>
+    }, 150);
+  }
+</script>
