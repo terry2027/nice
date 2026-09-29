@@ -26,6 +26,19 @@
         z-index: 9999 !important;
       }
     </style>
+    <style>
+      /* Target all possible container elements used by Cognigy WebRTC */
+      cognigy-webrtc,
+      #cognigy-webrtc-widget,
+      div[id*="cognigy-webrtc"],
+      div[class*="webrtc"],
+      /* Catch any container injected with fixed right-side positioning */
+      body>div[style*="fixed"][style*="right"] {
+        left: 24px !important;
+        right: auto !important;
+        bottom: 24px !important;
+      }
+    </style>
   </head>
   <body>
     <!-- React Application Mount Point -->
