@@ -1,58 +1,55 @@
-<!-- Cognigy WebRTC Script -->
-<script src="https://github.com/Cognigy/click-to-call-widget/releases/latest/download/webRTCWidget.js"></script>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kismet — Provider Portal</title>
 
-<script>
-  // 1. Initialize widget on page load so it is ready in the background
-  window.addEventListener("load", () => {
-    if (window.initWebRTCWidget) {
-      window.initWebRTCWidget(
-        "https://endpoint-trial.cognigy.ai/cc80b6b387a2aa47eb25413a1e4ba27650b6c6a865ebe79173142950f334814a"
+    <style>
+      /* Ensure the page body fills the viewport */
+      html, body, #root {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Anchor Cognigy WebRTC Click-To-Call to Bottom-Left */
+      #cognigy-webrtc-widget,
+      .cognigy-webrtc-widget-container,
+      div[class*="webrtc-widget"] {
+        position: fixed !important;
+        bottom: 24px !important;
+        left: 24px !important;
+        right: auto !important;
+        z-index: 9999 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- React Application Mount Point -->
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Cognigy Webchat (Bottom-Right) -->
+    <script src="https://github.com/Cognigy/Webchat/releases/latest/download/webchat.js"></script>
+    <script>
+      initWebchat(
+        "https://endpoint-trial.cognigy.ai/f16a92881c458c869a8c86609d830cbe8de06311779abf443bc3b3b3d4e02166"
       );
-    }
-  });
+    </script>
 
-  // Helper function to find the real clickable button even inside Shadow DOM
-  function findWidgetButton() {
-    // 1. Standard DOM search across all common Cognigy wrapper elements
-    const standardBtn = document.querySelector(
-      '#cognigy-webrtc-widget button, .cognigy-webrtc-widget button, [class*="webrtc"] button'
-    );
-    if (standardBtn) return standardBtn;
-
-    // 2. Shadow DOM search
-    const hosts = document.querySelectorAll(
-      '#cognigy-webrtc-widget, [class*="webrtc"], cognigy-webrtc'
-    );
-    for (const host of hosts) {
-      if (host.shadowRoot) {
-        const shadowBtn = host.shadowRoot.querySelector('button, [role="button"]');
-        if (shadowBtn) return shadowBtn;
-      }
-    }
-
-    return null;
-  }
-
-  function startWebRTCCall() {
-    let attempts = 0;
-    const maxAttempts = 20;
-
-    const interval = setInterval(() => {
-      attempts++;
-      const callBtn = findWidgetButton();
-
-      if (callBtn) {
-        clearInterval(interval);
-        // Dispatch synthetic click event
-        callBtn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
-
-        // Hide your custom Kai card once call connects
-        const card = document.getElementById("kai-agent-card");
-        if (card) card.style.display = "none";
-      } else if (attempts >= maxAttempts) {
-        clearInterval(interval);
-        console.warn("Could not find Cognigy WebRTC button to auto-click.");
-      }
-    }, 150);
-  }
-</script>
+    <!-- Cognigy WebRTC Click-to-Call Widget (Bottom-Left) -->
+    <script src="https://github.com/Cognigy/click-to-call-widget/releases/latest/download/webRTCWidget.js"></script>
+    <script>
+      window.addEventListener("load", () => {
+        if (window.initWebRTCWidget) {
+          window.initWebRTCWidget(
+            "https://endpoint-trial.cognigy.ai/cc80b6b387a2aa47eb25413a1e4ba27650b6c6a865ebe79173142950f334814a"
+          );
+        }
+      });
+    </script>
+  </body>
+</html>
