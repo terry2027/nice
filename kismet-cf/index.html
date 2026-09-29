@@ -5,6 +5,19 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kismet — Provider Portal</title>
+
+    <!-- Position WebRTC Widget on Bottom-Left -->
+    <style>
+      #cognigy-webrtc-widget,
+      .cognigy-webrtc-widget-container,
+      div[class*="webrtc-widget"] {
+        position: fixed !important;
+        bottom: 20px !important;
+        left: 20px !important;
+        right: auto !important;
+        z-index: 9999 !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
@@ -16,6 +29,18 @@
       initWebchat(
         "https://endpoint-trial.cognigy.ai/f16a92881c458c869a8c86609d830cbe8de06311779abf443bc3b3b3d4e02166"
       );
+    </script>
+
+    <!-- Cognigy WebRTC Widget (Bottom-Left) -->
+    <script src="https://github.com/Cognigy/click-to-call-widget/releases/latest/download/webRTCWidget.js"></script>
+    <script>
+      addEventListener("load", (event) => {
+        if (window.initWebRTCWidget) {
+          window.initWebRTCWidget(
+            "https://endpoint-trial.cognigy.ai/cc80b6b387a2aa47eb25413a1e4ba27650b6c6a865ebe79173142950f334814a"
+          );
+        }
+      });
     </script>
   </body>
 </html>
