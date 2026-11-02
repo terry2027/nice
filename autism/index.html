@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>Demo-Site</title>
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+            background: #FFF;
+        }
+    </style>
+</head>
+
+<body>
+
+    <center>
+        <img src="images/homepage.png" width="100%">
+    </center>
+   
+<script>
+    (function(n,u){
+    window.CXoneDfo=n,
+    window[n]=window[n]||function(){(window[n].q=window[n].q||[]).push(arguments)},window[n].u=u,
+    e=document.createElement("script"),e.type="module",e.src=u+"?"+Math.round(Date.now()/1e3/3600),
+    document.head.appendChild(e)
+    })('cxone','https://web-modules-de-na1.niceincontact.com/loader/1/loader.js');
+
+    cxone('init', '1092');
+    cxone('chat', 'init', 1092, 'chat_90cd2c1b-6e96-4f18-8feb-78379c306e81');
+    cxone('chat', 'enableCloseIcon', true);
+
+    // Suppress "No agent available" / "One of our agents will talk to you shortly" banner
+        cxone('chat', 'setTranslations', {
+            waitingDescription: '',
+            waitingForAgent: '',
+            waiting: '',
+            waitingInQueue: ''
+        });
+
+        cxone('chat', 'onPushUpdate', ['CaseStatusChanged'], pushUpdatePayload => { 
+        if (typeof pushUpdatePayload === 'undefined' || typeof pushUpdatePayload.data === 'undefined') { 
+          return; 
+        }  
+        const { status } = pushUpdatePayload.data.case || {};   
+        if (typeof status === 'undefined') { 
+          return; 
+        }   
+        // When a previous case has been closed, this will set the custom fields again. 
+        if (status === 'closed') { 
+          localStorage.removeItem('_BECustomerID') ; 
+        } 
+      }); 
+</script>
+
+</body>
+
+</html>
