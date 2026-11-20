@@ -23,8 +23,8 @@ export default function App() {
       <Header onReset={handleReset} />
       {state.view === 'landing' && <LandingPage dispatch={dispatch} />}
       {state.view === 'courseUnits' && <CourseUnitsPage />}
-      {state.view === 'registration' && <RegistrationPage />}
-      {state.view === 'confirmation' && <ConfirmationPage />}
+      {state.view === 'registration' && <RegistrationPage firstName={state.firstName} dispatch={dispatch} />}
+      {state.view === 'confirmation' && <ConfirmationPage registration={state.registration} dispatch={dispatch} />}
       <Footer />
 
       {/* Demo floating toolbar — uncomment import above and the line below during development */}
