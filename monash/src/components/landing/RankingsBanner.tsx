@@ -31,7 +31,9 @@ export default function RankingsBanner() {
                   <p>
                     Stay informed about Monash study options and upcoming events relevant to you.
                     <br />
+                    {' '}
                     <br />
+                    {' '}
                     <a href="https://www.monash.edu/study#form" className="btn">Sign up now</a>
                   </p>
                 </div>

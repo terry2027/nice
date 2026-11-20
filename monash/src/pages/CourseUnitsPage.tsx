@@ -1,7 +1,10 @@
+import SearchContent from '../components/search/SearchContent'
+import '../search.css'
+
 export default function CourseUnitsPage() {
   return (
-    <main className="wrap">
-      <h1>CourseUnits</h1>
+    <main className="search-page">
+      <SearchContent />
     </main>
   )
 }

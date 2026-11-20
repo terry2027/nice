@@ -46,7 +46,7 @@ export default function StudyCarousel() {
                 </div>
               </a>
             </div>
-            <div className="card-image-carousel__slide" aria-label="4 / 6" role="group">
+            <div className="card-image-carousel__slide" aria-label="4 / 6" role="group" style={{ width: "360px", marginRight: "30px" }}>
               <a href="https://www.monash.edu/study/international" className="card-image">
                 <div className="card-image__thumbnail">
                   <img alt="" className="swiper-lazy" />
@@ -60,7 +60,7 @@ export default function StudyCarousel() {
                 </div>
               </a>
             </div>
-            <div className="card-image-carousel__slide" aria-label="5 / 6" role="group">
+            <div className="card-image-carousel__slide" aria-label="5 / 6" role="group" style={{ width: "360px", marginRight: "30px" }}>
               <a href="https://www.monash.edu/admissions/help" className="card-image">
                 <div className="card-image__thumbnail">
                   <img alt="" className="swiper-lazy" />

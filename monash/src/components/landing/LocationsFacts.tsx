@@ -10,9 +10,9 @@ export default function LocationsFacts() {
                 <h3 className="graphite-h4">Australia's largest university</h3>
                 <div className="graphite-p-m facts-and-figures-item__description facts-and-figures-item__description--font-14px">
                   <p>
-                    Our
+                    Our{' '}
                     <a href="https://www.monash.edu/about/our-locations">four main campuses</a>
-                    – Clayton, Caulfield, Peninsula and Parkville – each offer a distinct learning environment and collectively brings together more than 80,000 students.
+                    {' '}– Clayton, Caulfield, Peninsula and Parkville – each offer a distinct learning environment and collectively brings together more than 80,000 students.
                   </p>
                 </div>
               </div>
@@ -27,17 +27,17 @@ export default function LocationsFacts() {
                 <h3 className="graphite-h4">Monash around the world</h3>
                 <div className="graphite-p-m facts-and-figures-item__description facts-and-figures-item__description--font-14px">
                   <p>
-                    Our international presence in
+                    Our international presence in{' '}
                     <a href="https://www.monash.edu.my/">Malaysia</a>
-                    ,
+                    ,{' '}
                     <a href="https://www.monash.edu/indonesia">Indonesia</a>
-                    ,
+                    ,{' '}
                     <a href="https://www.iitbmonash.org/">India</a>
-                    ,
+                    ,{' '}
                     <a href="https://www.monash.edu/suzhou">China</a>
-                    and
+                    {' '}and{' '}
                     <a href="https://www.monash.edu/prato">Italy</a>
-                    extend Monash’s education, research and innovation capabilities across the Indo-Pacific and Europe.
+                    {' '}extend Monash’s education, research and innovation capabilities across the Indo-Pacific and Europe.
                   </p>
                 </div>
               </div>
@@ -52,9 +52,9 @@ export default function LocationsFacts() {
                 <h3 className="graphite-h4">Monash Technology Precinct</h3>
                 <div className="graphite-p-m facts-and-figures-item__description facts-and-figures-item__description--font-14px">
                   <p>
-                    The
+                    The{' '}
                     <a href="https://www.monash.edu/industry/monash-technology-precinct">Monash Technology Precinct</a>
-                    is Victoria’s largest employment hub outside the CBD, home to key research and technology platforms, including CSIRO and the Victorian Heart Hospital.
+                    {' '}is Victoria’s largest employment hub outside the CBD, home to key research and technology platforms, including CSIRO and the Victorian Heart Hospital.
                   </p>
                 </div>
               </div>
@@ -69,9 +69,9 @@ export default function LocationsFacts() {
                 <h3 className="graphite-h4">Monash Boston Hub</h3>
                 <div className="graphite-p-m facts-and-figures-item__description facts-and-figures-item__description--font-14px">
                   <p>
-                    Located in Cambridge, Massachusetts, the
+                    Located in Cambridge, Massachusetts, the{' '}
                     <a href="https://www.monash.edu/boston-hub">Monash Boston Hub</a>
-                    bridges Monash researchers with biotech and pharmaceutical networks across North America and Europe.
+                    {' '}bridges Monash researchers with biotech and pharmaceutical networks across North America and Europe.
                   </p>
                 </div>
               </div>

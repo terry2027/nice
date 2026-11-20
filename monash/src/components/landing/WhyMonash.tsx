@@ -10,9 +10,9 @@ export default function WhyMonash() {
             <h2 className="graphite-h2 facts-and-figures__heading">Why choose Monash?</h2>
             <div className="graphite-p-l facts-and-figures__description">
               <p>
-                We're recognised among the world's leading universities for education, research and graduate outcomes – backed by
+                We're recognised among the world's leading universities for education, research and graduate outcomes – backed by{' '}
                 <a href="https://www.monash.edu/about/our-rankings">global rankings</a>
-                and real-world impact.
+                {' '}and real-world impact.
               </p>
             </div>
           </div>
@@ -22,7 +22,7 @@ export default function WhyMonash() {
                 <h3 className="graphite-h4">Top 40 university</h3>
                 <div className="graphite-p-m facts-and-figures-item__description facts-and-figures-item__description--font-14px">
                   <p>
-                    Ranked 31st in the QS World University Rankings 2027 – our highest-ever position.
+                    Ranked 31st in the QS World University Rankings 2027 – our highest-ever position.{' '}
                     <br />
                     We also have 15 subjects in the world's top 30.
                   </p>
