@@ -1191,7 +1191,7 @@ a:hover { color: var(--monash-blue-dark); }
 .demo-stub__hint { margin: 0 0 1rem; }
 .demo-stub__actions { display: flex; flex-wrap: wrap; gap: .75rem; }
 
-/* ---------- Landing page (full-width image) ---------- */
+/* ---------- Landing page ---------- */
 .landing-page { display: block; width: 100%; margin: 0; padding: 0; }
-.landing-page__image { display: block; width: 100%; height: auto; }
 .landing-page + .ftr { margin-top: 0; }
+.landing-page svg.icon { fill: currentColor; width: 1.25rem; height: 1.25rem; }
