@@ -1,3 +1,8 @@
+import thumbStudy from '../../assets/search/thumb-study.svg'
+import thumbNewsDefault from '../../assets/search/thumb-news-default.svg'
+import thumbNewsExcellence from '../../assets/search/thumb-news-excellence.svg'
+import thumbProfile from '../../assets/search/thumb-profile.svg'
+
 export default function SearchResultList() {
   return (
     <ol className="list-unstyled">
@@ -66,7 +71,7 @@ export default function SearchResultList() {
           </div>
           <div className="card-body">
             <div className="card-text">
-              <img className="img-fluid float-right deferred ml-3" alt="Thumbnail for Undergraduate study options - Accounting - Monash Business School" src="//monash-search.clients.funnelback.com/stencils/resources/base/v15.8/img/pixel.gif" style={{ display: "inline" }} />
+              <img className="img-fluid float-right ml-3" alt="Thumbnail for Undergraduate study options - Accounting - Monash Business School" src={thumbStudy} />
               {' '}A degree in accounting is not just for accountants. The ability to understand and interpret financial information is essential for business decision-making, making a Monash undergraduate qualification in accounting a great basis for a successful
             </div>
           </div>
@@ -85,7 +90,7 @@ export default function SearchResultList() {
             <div className="card-text">
               <div className="row no-gutters">
                 <div className="col-md-12">
-                  <img className="img-fluid float-right ml-3" alt="Thumbnail for Prestigious award for Monash University" src="https://www.monash.edu/__data/assets/image/0008/539225/default-news-thumbnail.jpg" />
+                  <img className="img-fluid float-right ml-3" alt="Thumbnail for Prestigious award for Monash University" src={thumbNewsDefault} />
                   <p>
                     <span className="text-muted">09 Aug 2018</span>
                   </p>
@@ -116,7 +121,7 @@ export default function SearchResultList() {
             <div className="card-text">
               <div className="row no-gutters">
                 <div className="col-md-12">
-                  <img className="img-fluid float-right ml-3" alt="Thumbnail for Prestigious award for Monash University" src="http://mon.clients.squiz.net/__data/assets/image/0008/539225/default-news-thumbnail.jpg" />
+                  <img className="img-fluid float-right ml-3" alt="Thumbnail for Prestigious award for Monash University" src={thumbNewsDefault} />
                   <p>
                     <span className="text-muted">09 Aug 2018</span>
                   </p>
@@ -139,7 +144,7 @@ export default function SearchResultList() {
           <span className="card-tag">Profile</span>
           <div className="card-body">
             <div className="card-body-people-img">
-              <img className="img-fluid" alt="Thumbnail for Norita Nasir - Monash University" src="https://research.monash.edu/files-asset/571446681/EDITED_B_47bvi.jpg/" />
+              <img className="img-fluid" alt="Thumbnail for Norita Nasir - Monash University" src={thumbProfile} />
             </div>
             <div className="card-body-people">
               <h4>
@@ -167,7 +172,7 @@ export default function SearchResultList() {
             <div className="card-text">
               <div className="row no-gutters">
                 <div className="col-md-12">
-                  <img className="img-fluid float-right ml-3" alt="Thumbnail for School of Business Celebrates Excellence in Professional Accounting" src="https://www.monash.edu.my/__data/assets/image/0010/4466188/Accountancy-Excellency-2026-thumbnail.jpg" />
+                  <img className="img-fluid float-right ml-3" alt="Thumbnail for School of Business Celebrates Excellence in Professional Accounting" src={thumbNewsExcellence} />
                   <p>
                     <span className="text-muted">21 Oct 2026</span>
                   </p>
