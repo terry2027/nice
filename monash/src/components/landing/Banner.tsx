@@ -1,9 +1,14 @@
+import bannerFull from '../../assets/landing/banner-full.png'
+import bannerLarge from '../../assets/landing/banner-large.png'
+import bannerMedium from '../../assets/landing/banner-medium.png'
+import bannerSmall from '../../assets/landing/banner-small.png'
+
 export default function Banner() {
   return (
     <div className="banner-graphite">
       <div className="banner-graphite__media--wrapper" style={{ height: "700px" }}>
         <picture className="bg-cover-image">
-          <img srcSet="https://www.monash.edu/__data/assets/image/0009/4451346/varieties/feature.box.png 605w, https://www.monash.edu/__data/assets/image/0009/4451346/varieties/banner.static.medium.png 960w, https://www.monash.edu/__data/assets/image/0009/4451346/varieties/banner.static.png 1467w" src="https://www.monash.edu/__data/assets/image/0009/4451346/Web-Banner-2400x900.png" alt="Web Banner" />
+          <img srcSet={`${bannerSmall} 605w, ${bannerMedium} 960w, ${bannerLarge} 1467w`} src={bannerFull} alt="Web Banner" />
         </picture>
       </div>
       <div className="banner-graphite__inner" style={{ height: "700px" }}>
