@@ -1176,8 +1176,13 @@ a:hover { color: var(--monash-blue-dark); }
 
 /* ---------- Demo stub (landing page) ---------- */
 .demo-stub {
-  margin: 2rem 0;
-  padding: 1.5rem;
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 2000;
+  max-width: 320px;
+  box-shadow: 0 2px 8px #0000002a;
+  padding: 1rem 1.25rem;
   background: var(--monash-grey-light);
   border: 1px dashed var(--monash-blue);
   border-radius: 6px;
@@ -1185,3 +1190,8 @@ a:hover { color: var(--monash-blue-dark); }
 .demo-stub__title { margin: 0 0 .25rem; font-size: 1.125rem; color: var(--monash-blue); }
 .demo-stub__hint { margin: 0 0 1rem; }
 .demo-stub__actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+
+/* ---------- Landing page (full-width image) ---------- */
+.landing-page { display: block; width: 100%; margin: 0; padding: 0; }
+.landing-page__image { display: block; width: 100%; height: auto; }
+.landing-page + .ftr { margin-top: 0; }
