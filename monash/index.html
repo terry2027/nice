@@ -20,6 +20,14 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
 
+    <!-- Cognigy Webchat (Bottom-Right) -->
+    <script src="https://github.com/Cognigy/Webchat/releases/latest/download/webchat.js"></script>
+    <script>
+      initWebchat(
+        "https://cognigy-endpoint-na1.nicecxone.com/035e8eef65446d4e8d708577eb2134e842f469f9653152e3e1ee229decbb0025",
+      );
+    </script>
+
     <!-- Cognigy Click To Call (Center) -->
     <script src="https://github.com/Cognigy/click-to-call-widget/releases/latest/download/webRTCWidget.js"></script>
     <script>
@@ -30,14 +38,6 @@
           );
         }
       });
-    </script>
-
-    <!-- Cognigy Webchat (Bottom-Right) -->
-    <script src="https://github.com/Cognigy/Webchat/releases/latest/download/webchat.js"></script>
-    <script>
-      initWebchat(
-        "https://cognigy-endpoint-na1.nicecxone.com/035e8eef65446d4e8d708577eb2134e842f469f9653152e3e1ee229decbb0025",
-      );
     </script>
   </body>
 </html>
