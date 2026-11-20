@@ -11,11 +11,26 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Cognigy Click To Call (Center) -->
+    <script src="https://github.com/Cognigy/click-to-call-widget/releases/latest/download/webRTCWidget.js"></script>
+    <script>
+      addEventListener("load", (event) => {
+        if (window.initWebRTCWidget) {
+          window.initWebRTCWidget(
+            "wss://cognigy-endpoint-na1.nicecxone.com/c03b0f60b50548b0c7444c6ed24c311602a82c6ab6c6d2d60d19abdf0f8ac24e/voiceGateway",
+          );
+        }
+      });
+    </script>
 
     <!-- Cognigy Webchat (Bottom-Right) -->
     <script src="https://github.com/Cognigy/Webchat/releases/latest/download/webchat.js"></script>
