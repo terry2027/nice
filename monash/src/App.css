@@ -1198,16 +1198,16 @@ a:hover { color: var(--monash-blue-dark); }
 .landing-page svg.icon { fill: currentColor; width: 1.25rem; height: 1.25rem; }
 .landing-page .banner-graphite__link { color: #fff; }
 
-/* ---------- Cognigy click-to-call widget: centre of the page ----------
+/* ---------- Cognigy click-to-call widget: bottom centre of the page ----------
    The widget is fixed bottom-right by default; the centred layout is left to
    the host page. body.cognigy-webrtc-embed (index.html) makes the widget add
    body.webrtc-position-centered, which also adjusts its transcript panel. */
 body.webrtc-position-centered .webrtc_widget_outer_wrapper {
-  top: 50%;
+  top: auto;
   left: 50%;
   right: auto;
-  bottom: auto;
-  transform: translate(-50%, -50%);
+  bottom: 40px;
+  transform: translateX(-50%);
   align-items: center;
   z-index: 2147483000;
 }
