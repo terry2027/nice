@@ -20,7 +20,7 @@ const CITIZENSHIP = [
 const initialValues: RegistrationValues = {
   title: 'Ms',
   givenNames: '',
-  lastName: 'Whitfield',
+  lastName: '',
   mononymous: false,
   preferredName: '',
   birthdate: '1998-03-14',
