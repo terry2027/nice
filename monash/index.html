@@ -16,7 +16,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
   </head>
-  <body>
+  <body class="cognigy-webrtc-embed">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
 
@@ -34,7 +34,7 @@
       addEventListener("load", (event) => {
         if (window.initWebRTCWidget) {
           window.initWebRTCWidget(
-            "wss://cognigy-endpoint-na1.nicecxone.com/c03b0f60b50548b0c7444c6ed24c311602a82c6ab6c6d2d60d19abdf0f8ac24e/voiceGateway",
+            "https://cognigy-endpoint-na1.nicecxone.com/c03b0f60b50548b0c7444c6ed24c311602a82c6ab6c6d2d60d19abdf0f8ac24e",
           );
         }
       });
