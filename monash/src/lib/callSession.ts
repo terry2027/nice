@@ -9,7 +9,6 @@ interface CallSession {
 
 interface Webchat {
   sendMessage: (text: string, data?: Record<string, unknown>, options?: { label?: string }) => void
-  open?: () => void | Promise<void>
 }
 
 declare global {
@@ -48,7 +47,6 @@ export function notifyAgent(
   const webchat = window.__monashWebchat
   if (webchat) {
     try {
-      void webchat.open?.()
       webchat.sendMessage(text, data, chatLabel ? { label: chatLabel } : undefined)
       console.log('[Monash Demo] sendMessage sent to agent (chat):', text, data)
       return 'chat'
