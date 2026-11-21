@@ -25,7 +25,12 @@ export default function App() {
     const reg = state.registration
     if (state.view !== 'confirmation' || !reg || notified.current === reg) return
     notified.current = reg
-    notifyAgent('registration_submitted', { firstName: reg.values.givenNames })
+    console.log('[Monash Demo] registration submitted — notifying agent')
+    notifyAgent(
+      'registration_submitted',
+      { firstName: reg.values.givenNames },
+      { chatLabel: 'I have submitted my registration.' },
+    )
   }, [state.view, state.registration])
 
   const handleReset = () => dispatch({ type: 'STATE_EVENT', state: 'reset' })

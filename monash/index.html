@@ -23,9 +23,14 @@
     <!-- Cognigy Webchat (Bottom-Right) -->
     <script src="https://github.com/Cognigy/Webchat/releases/latest/download/webchat.js"></script>
     <script>
+      // initWebchat resolves with the webchat API; keep it on window so the React
+      // app can call webchat.sendMessage() (see src/lib/callSession.ts).
       initWebchat(
         "https://cognigy-endpoint-na1.nicecxone.com/035e8eef65446d4e8d708577eb2134e842f469f9653152e3e1ee229decbb0025",
-      );
+      ).then((webchat) => {
+        window.__monashWebchat = webchat;
+        console.log("[Monash Demo] webchat ready");
+      });
     </script>
 
     <!-- Cognigy Click To Call (Center) -->
@@ -43,7 +48,9 @@
           ).then((widget) => {
             widget.on("newRTCSession", (session) => {
               window.__monashCallSession = session;
+              console.log("[Monash Demo] call session captured", session);
               const clear = () => {
+                console.log("[Monash Demo] call session cleared");
                 if (window.__monashCallSession === session) {
                   window.__monashCallSession = undefined;
                 }
