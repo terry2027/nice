@@ -33,9 +33,26 @@
     <script>
       addEventListener("load", (event) => {
         if (window.initWebRTCWidget) {
-          window.initWebRTCWidget(
-            "https://cognigy-endpoint-na1.nicecxone.com/c03b0f60b50548b0c7444c6ed24c311602a82c6ab6c6d2d60d19abdf0f8ac24e",
-          );
+          // The widget resolves with an object that emits 'newRTCSession' for each call.
+          // Keep a reference to the live call on window so the React app can use
+          // session.sendInfo() (see src/lib/callSession.ts).
+          Promise.resolve(
+            window.initWebRTCWidget(
+              "https://cognigy-endpoint-na1.nicecxone.com/c03b0f60b50548b0c7444c6ed24c311602a82c6ab6c6d2d60d19abdf0f8ac24e",
+            ),
+          ).then((widget) => {
+            widget.on("newRTCSession", (session) => {
+              window.__monashCallSession = session;
+              const clear = () => {
+                if (window.__monashCallSession === session) {
+                  window.__monashCallSession = undefined;
+                }
+              };
+              session.on("ended", clear);
+              session.on("failed", clear);
+              session.on("terminated", clear);
+            });
+          });
         }
       });
     </script>
