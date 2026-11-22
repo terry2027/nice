@@ -20,9 +20,9 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
 
-    <!-- Cognigy Webchat (Bottom-Right) -->
-    <script src="https://github.com/Cognigy/Webchat/releases/latest/download/webchat.js"></script>
-    <script>
+    <!-- Cognigy Webchat NA1  (Bottom-Right) -->
+    <!-- script src="https://github.com/Cognigy/Webchat/releases/latest/download/webchat.js"></script -->
+    <!--script>
       // initWebchat resolves with the webchat API; keep it on window so the React
       // app can call webchat.sendMessage() (see src/lib/callSession.ts).
       initWebchat(
@@ -31,6 +31,14 @@
         window.__monashWebchat = webchat;
         console.log("[Monash Demo] webchat ready");
       });
+    </script -->
+
+    <!-- Cognigy Webchat AU1 (Bottom-Right) -->
+    <script src="https://github.com/Cognigy/Webchat/releases/latest/download/webchat.js"></script>
+    <script>
+      initWebchat(
+        "https://cognigy-endpoint-au1.nicecxone.com/6436589f4e66b0d74dc9af950af631fde87f2128774c9a0491c675492e134271",
+      );
     </script>
 
     <!-- Cognigy Click To Call (Center) -->
