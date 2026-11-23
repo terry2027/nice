@@ -39,9 +39,9 @@
       initWebchat(
         "https://cognigy-endpoint-au1.nicecxone.com/6436589f4e66b0d74dc9af950af631fde87f2128774c9a0491c675492e134271",
       );
-    </script -->
+    </script-->
 
-    <!-- Cognigy Click To Call (Center) -->
+    <!-- Cognigy Click To Call NA 1(Center) -->
     <script src="https://github.com/Cognigy/click-to-call-widget/releases/latest/download/webRTCWidget.js"></script>
     <script>
       addEventListener("load", (event) => {
@@ -71,5 +71,36 @@
         }
       });
     </script>
+
+    <!-- Cognigy Click To Call AU1 1(Center) -->
+    <!-- script src="https://github.com/Cognigy/click-to-call-widget/releases/latest/download/webRTCWidget.js"></script -->
+    <!-- script>
+      addEventListener("load", (event) => {
+        if (window.initWebRTCWidget) {
+          // The widget resolves with an object that emits 'newRTCSession' for each call.
+          // Keep a reference to the live call on window so the React app can use
+          // session.sendInfo() (see src/lib/callSession.ts).
+          Promise.resolve(
+            window.initWebRTCWidget(
+              "https://cognigy-endpoint-au1.nicecxone.com/c6f4b7f363272140637adbc05039ce5c93bfee799b5d1d693f53510bd42569f5",
+            ),
+          ).then((widget) => {
+            widget.on("newRTCSession", (session) => {
+              window.__monashCallSession = session;
+              console.log("[Monash Demo] call session captured", session);
+              const clear = () => {
+                console.log("[Monash Demo] call session cleared");
+                if (window.__monashCallSession === session) {
+                  window.__monashCallSession = undefined;
+                }
+              };
+              session.on("ended", clear);
+              session.on("failed", clear);
+              session.on("terminated", clear);
+            });
+          });
+        }
+      });
+    </script -->
   </body>
 </html>
